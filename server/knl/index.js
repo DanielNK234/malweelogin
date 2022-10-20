@@ -10,6 +10,7 @@ exports.get       = container.get;
 exports.post      = container.post;
 exports.put       = container.put;
 exports.delete    = container.delete;
+exports.patch     = container.patch;
 exports.objects   = objects;
 exports.createException       = exception.createException;
 exports.createExceptionObject = exception.createExceptionObject;
