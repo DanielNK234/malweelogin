@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'malwee';
 
   constructor(private router: Router) { 
-    this.router.navigateByUrl('/group');
+    this.router.navigateByUrl('/login');
   }
 }

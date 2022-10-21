@@ -5,7 +5,7 @@ const securityConsts = require('../consts/security-consts');
 
 knl.post('group', async(req, resp) => {
     const schema = Joi.object({
-        descrição : Joi.string().min(10).max(200).required(),
+        description : Joi.string().min(1).max(200).required(),
        
     })
 
@@ -14,7 +14,7 @@ knl.post('group', async(req, resp) => {
     const result = await knl.sequelize().models.grupo.findAll({
         where : {
            
-            descrição : req.body.descrição
+            description : req.body.description
         }
     });
 
@@ -23,7 +23,7 @@ knl.post('group', async(req, resp) => {
 
     const user = knl.sequelize().models.grupo.build({
         status : "1",
-        descrição : req.body.descrição
+        description : req.body.description
     });
 
     await user.save();
@@ -39,7 +39,7 @@ knl.get('group', async(req, resp) => {
 
 knl.put('group', async(req, resp) => {
     const result = await knl.sequelize().models.grupo.update({
-        descrição:req.body.descrição,
+        descrição:req.body.description,
     }, {
         where : {
         id : req.body.id
