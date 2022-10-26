@@ -32,7 +32,9 @@ knl.post('group', async(req, resp) => {
 
 knl.get('group', async(req, resp) => {
     const result = await knl.sequelize().models.grupo.findAll({
-    status:req.body.status
+    where: {
+            status:1
+    }   
     });
     resp.send(result)
 });
@@ -60,7 +62,8 @@ knl.delete('group', async(req, resp) => {
 knl.patch('group', async(req, resp) => {
     const result = await knl.sequelize().models.grupo.update({
     status:"0"
-    },{
+    },
+    {
          where : {
             id : req.body.id,
             

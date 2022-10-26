@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-content *ngIf="htmladd =='true'" >
+    <mat-card-content *ngIf="htmladd ==2" >
        <mat-card-title>
            <h1>Cadastrar</h1>
        </mat-card-title>
@@ -10,22 +10,36 @@
          <button  mat-raised-button color="primary" (click)="groupAdd()" >Cadastrar</button>
        </mat-card-actions>
        
-     
+     <!-- ---------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
    </mat-card-content>
-   <mat-card-content *ngIf="htmladd =='false'">
+   <mat-card-content *ngIf="htmladd ==1">
        <mat-form-field class="example-full-width" appearance="fill">
          <input matInput placeholder="Inserir grupo" [(ngModel)]="search">
          <button mat-icon-button matSuffix (click)="htmlAdd()" [attr.aria-label]="'Addgroup'" [attr.aria-pressed]="add">
            <mat-icon>add</mat-icon>
        </button>
+       <button mat-icon-button matSuffix (click)="deleteGroup()" [attr.aria-label]="'groupDelete'" [attr.aria-pressed]="delete">
+        <mat-icon>delete</mat-icon>
+      </button>
        </mat-form-field>
      
      <br>
-   <div class="row text-center" *ngFor="let grupos of grupos | filter : search ">
+   <div class="row text-center" *ngFor="let grupos of grupos | filter : search  ">
      <p><b>{{grupos.description}}</b><p>
    </div>
- 
-    
-     
- </mat-card-content>
- </mat-card>
+  </mat-card-content>
+  <!-- ---------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  
+  <mat-card-content *ngIf="htmladd ==4">
+    <mat-card-title>
+      <h1>Deletar</h1>
+    </mat-card-title>
+    <mat-form-field class="example-full-width" appearance="fill">
+       <input matInput placeholder="Insira o ID" type="number" minlength="1" required [(ngModel)]="id">
+    </mat-form-field>
+    <br>
+    <mat-card-actions>
+      <button  mat-raised-button color="primary"  (click)="groupDelete()">Excluir</button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

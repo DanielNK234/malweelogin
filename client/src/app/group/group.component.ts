@@ -9,46 +9,41 @@ import { Router } from '@angular/router';
 })
 export class GroupComponent implements OnInit {
 add: any;
+delete: any;
 name : string = '';
 description: string = '';
 grupos: Array<any>= [];
-htmladd: string ='';
+htmladd: number = 0;
 search: string='';
+id: number | undefined;
 
   constructor(private router : Router, private httpService: HttpService) { }
 
   ngOnInit(): void {
     this.listarGroup();
-    this.htmladd='false';
+    this.htmladd=1;
   }
   async htmlAdd(){
-    this.htmladd='true';
-    /*console.log("Aqui");
-    this.group= await this.httpService.post('group', { description: this.description});
-    
-     /* 
-       console.log("Aqui");
-       this.httpclient.post('http://localhost:3007/group', { description : this.description}, ).toPromise().then((response : any)=> {
-       console.log(response);
-    */
-        
-      
-
-    //})
+    this.htmladd=2;
 
   }
   async groupAdd(){
-    
-    console.log("Aqui");
+    console.log("grupo adicionado");
     console.log(this.description);
     this.grupos = await this.httpService.post('group', { description: this.description});
 
   }
+  deleteGroup(){
+    this.htmladd= 4;
+  }
   async listarGroup(){
-    console.log("Aqui2");
+    console.log("grupo listado");
     this.grupos= await this.httpService.get('group');
-    
-
+  }
+  async groupDelete(){
+    console.log(this.id);
+    console.log("grupo deletado");
+    this.grupos= await this.httpService.patch(`group`,{id : this.id});
   }
 
 }
