@@ -3,17 +3,50 @@
     
 }
 
-.caix{
-    border: 1px solid rgb(0, 0, 0);
+
+
+.row{
+display: flex;
+}
+.box{
+    border: 2px solid rgb(0, 0, 0);
     background: transparent;
-    padding: 300px 50px;
+    padding: 20px 20px;
     color: rgb(168, 168, 168);
     text-transform: uppercase;
     margin: 20px;
 }
 
-.row{
-display: flex;
+.example-form-field {
+    width: 90%;
+    padding-right: 2%;
+    padding-left: 1%;
+  }
+mat-grid-tile {
+    background: lightblue;
+    padding-left: 45%;
+    padding-bottom: 20%;
+    margin-left: 1%;
+  }
+  button{
+    cursor: pointer;
+    border: none;
 }
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+h1{
+  font-family: "Neo Sans", sans-serif;
+}
+.groups{
+  padding-left: 0.7%;
+}
+
 
 

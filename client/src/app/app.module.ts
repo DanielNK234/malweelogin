@@ -17,6 +17,7 @@ import { GroupComponent } from './group/group.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ModelComponent } from './model/model.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MenuComponent,
     DashComponent,
     GroupComponent,
-    UserComponent
+    UserComponent,
+    ModelComponent
   ],
   imports: [
     RoutesModule,

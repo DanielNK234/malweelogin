@@ -41,14 +41,14 @@ knl.get('group', async(req, resp) => {
 
 knl.put('group', async(req, resp) => {
     const result = await knl.sequelize().models.grupo.update({
-        descrição:req.body.description,
+        description:req.body.description,
     }, {
         where : {
         id : req.body.id
     }});
     
     resp.send(result);
-});
+}, securityConsts.USER_TYPE_PUBLIC);
 
 knl.delete('group', async(req, resp) => {
         const result = await knl.sequelize().models.grupo.destroy({

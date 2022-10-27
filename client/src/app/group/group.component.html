@@ -1,45 +1,19 @@
-<mat-card>
-    <mat-card-content *ngIf="htmladd ==2" >
-       <mat-card-title>
-           <h1>Cadastrar</h1>
-       </mat-card-title>
-       <mat-form-field class="example-full-width" appearance="fill">
-         <input matInput placeholder="Descrição" [(ngModel)]="description">
-       </mat-form-field>
-       <mat-card-actions>
-         <button  mat-raised-button color="primary" (click)="groupAdd()" >Cadastrar</button>
-       </mat-card-actions>
-       
-     <!-- ---------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-   </mat-card-content>
-   <mat-card-content *ngIf="htmladd ==1">
-       <mat-form-field class="example-full-width" appearance="fill">
-         <input matInput placeholder="Inserir grupo" [(ngModel)]="search">
-         <button mat-icon-button matSuffix (click)="htmlAdd()" [attr.aria-label]="'Addgroup'" [attr.aria-pressed]="add">
-           <mat-icon>add</mat-icon>
-       </button>
-       <button mat-icon-button matSuffix (click)="deleteGroup()" [attr.aria-label]="'groupDelete'" [attr.aria-pressed]="delete">
-        <mat-icon>delete</mat-icon>
-      </button>
-       </mat-form-field>
+<div class="">
+<mat-card-content>
+  <mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>Pesquisa</mat-label>
+    <input matInput type="text" placeholder="Digite um grupo" [(ngModel)] = 'search'>
+    <button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button>
+  <button (click)="openPutModal(grupos)"><mat-icon>add</mat-icon></button>
+</button>
      
      <br>
    <div class="row text-center" *ngFor="let grupos of grupos | filter : search  ">
-     <p><b>{{grupos.description}}</b><p>
+    <button (click)="openPutModal(grupos)"><h1>{{grupos.description}}</h1></button>
    </div>
   </mat-card-content>
-  <!-- ---------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
   
-  <mat-card-content *ngIf="htmladd ==4">
-    <mat-card-title>
-      <h1>Deletar</h1>
-    </mat-card-title>
-    <mat-form-field class="example-full-width" appearance="fill">
-       <input matInput placeholder="Insira o ID" type="number" minlength="1" required [(ngModel)]="id">
-    </mat-form-field>
-    <br>
-    <mat-card-actions>
-      <button  mat-raised-button color="primary"  (click)="groupDelete()">Excluir</button>
-    </mat-card-actions>
-  </mat-card-content>
-</mat-card>
