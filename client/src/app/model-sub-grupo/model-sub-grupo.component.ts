@@ -8,22 +8,25 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-model',
-  templateUrl: './model.component.html',
-  styleUrls: ['./model.component.scss']
+  selector: 'app-model-sub-grupo',
+  templateUrl: './model-sub-grupo.component.html',
+  styleUrls: ['./model-sub-grupo.component.scss']
 })
-export class ModelComponent implements OnInit {
+export class ModelSubGrupoComponent implements OnInit {
+
 add: any;
 delete: any;
 put: any;
 description: string = '';
+selectedGroup: number = 0;
 name : string = '';
-grupos: Array<any>= [];
+subgrupos: Array<any>= [];
+public grupos: Array<any>= [];
 htmladd: number = 0;
 search: string='';
 id: number | undefined;
 
-constructor(public dialogRef: MatDialogRef<ModelComponent>, private httpService : HttpService,
+constructor(public dialogRef: MatDialogRef<ModelSubGrupoComponent>, private httpService : HttpService,
   @Inject(MAT_DIALOG_DATA) private data : {id: number, description : string}) { }
 
   onNoClick(): void {
@@ -31,6 +34,7 @@ constructor(public dialogRef: MatDialogRef<ModelComponent>, private httpService 
   }
   
   ngOnInit(): void {
+    this.loadGrupo();
     console.log(this.data);
     if(this.data.id == null){
       this.htmladd = 2
@@ -47,30 +51,38 @@ constructor(public dialogRef: MatDialogRef<ModelComponent>, private httpService 
     this.htmladd=1;
 
   }
-  async groupAdd(){
-    console.log("grupo adicionado");
+  async subGroupAdd(){
+    console.log("Sub-grupo adicionado");
     console.log(this.description);
-    this.grupos = await this.httpService.post('group', { description: this.description});
+    this.subgrupos = await this.httpService.post('subgroup', { description: this.description});
     this.dialogRef.close();
 
   }
-  deleteGroup(){
+  deleteSubGroup(){
     this.htmladd= 2;
   }
-  async listarGroup(){
-    console.log("grupo listado");
-    this.grupos= await this.httpService.get('group');
+  async listarSubGroup(){
+    console.log("subgrupo listado");
+    this.subgrupos= await this.httpService.get('subgroup');
    
   }
-  async groupDelete(){
-    console.log("grupo deletado");
-    this.grupos= await this.httpService.patch(`group`,{id : this.id});
+
+
+  async subGroupDelete(){
+    this.subgrupos= await this.httpService.patch(`subgroup`,{id : this.id});
     this.dialogRef.close();
   }
 
-  public async putGrupo(){
-    this.grupos= await this.httpService.put(`group`, {id : this.id, description : this.description });
+  async putSubGrupo(){
+    this.subgrupos= await this.httpService.put(`subgroup`, {id : this.id, description : this.description });
     this.dialogRef.close();
-  }  
+  }
+  
+  async loadGrupo(){
+    this.grupos= await this.httpService.get('group');
+    console.log(this.grupos)
+  }
+  
+
 
 }

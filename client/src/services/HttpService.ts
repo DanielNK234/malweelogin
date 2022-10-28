@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class HttpService{
+  delete(arg0: string, arg1: { id: number | undefined; }): any[] | PromiseLike<any[]> {
+    throw new Error('Method not implemented.');
+  }
 
   private readonly baseUrl = 'http://localhost:3024/'
 
@@ -38,5 +41,6 @@ export class HttpService{
   public put(route : string, obj : any) : Promise<any>{
     return this.httpClient.put(this.baseUrl + route, obj, this.makeHttpOptions()).toPromise();
   }  
+  
 
 }

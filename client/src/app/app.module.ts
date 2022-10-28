@@ -18,6 +18,12 @@ import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ModelComponent } from './model/model.component';
+import { ModelSubGrupoComponent } from './model-sub-grupo/model-sub-grupo.component';
+import { SubGrupoComponent } from './sub-grupo/sub-grupo.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ColectionComponent } from './colection/colection.component';
+import { ProdutoComponent } from './produto/produto.component';
+import { DrpdownComponent } from './drpdown/drpdown.component';
 
 
 @NgModule({
@@ -30,7 +36,13 @@ import { ModelComponent } from './model/model.component';
     DashComponent,
     GroupComponent,
     UserComponent,
-    ModelComponent
+    ModelComponent,
+    ModelSubGrupoComponent,
+    SubGrupoComponent,
+    ClienteComponent,
+    ColectionComponent,
+    ProdutoComponent,
+    DrpdownComponent
   ],
   imports: [
     RoutesModule,

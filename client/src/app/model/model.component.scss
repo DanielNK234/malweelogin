@@ -12,10 +12,23 @@ mat-dialog-container{
     background-color: rgb(84, 84, 84);
     border: 2px solid rgb(0, 0, 0); 
 }
-button{
-    border: hidden;  
+.card{
     border: 2px solid rgb(0, 0, 0);
 }
-button:hover{
+.card:hover{
     background: #727272;
+}
+.but{
+    border: none;
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+.buts{
+    cursor: pointer;
+    background: none;
+    border: none;
+
 }

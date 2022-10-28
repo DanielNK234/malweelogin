@@ -1,0 +1,21 @@
+<div class="box">
+    <mat-card-content>
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Pesquisa</mat-label>
+        <input matInput type="text" placeholder="Digite um grupo"  [(ngModel)] = 'search'>
+        <button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button>
+      <button (click)="openPutModal(subgrupos)"><mat-icon>add</mat-icon></button>
+    </button>
+         
+         <br>
+       <div class="row text-center" *ngFor="let subgrupos of subgrupos | filter : search  ">
+        <ng-template [ngIf] = "subgrupos.fkGrupo != 0">
+        <button (click)="openPutModal(subgrupos)"><h1>{{subgrupos.id}} - {{subgrupos.description}}</h1></button>
+        </ng-template>
+       </div>
+      </mat-card-content>
+      </div>

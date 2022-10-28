@@ -1,4 +1,8 @@
+import { ClienteComponent } from "./cliente/cliente.component";
+import { ColectionComponent } from "./colection/colection.component";
 import { GroupComponent } from "./group/group.component";
+import { ProdutoComponent } from "./produto/produto.component";
+import { SubGrupoComponent } from "./sub-grupo/sub-grupo.component";
 import { UserComponent } from "./user/user.component";
 
 export const MenuItens = [
@@ -13,5 +17,29 @@ export const MenuItens = [
         caption : 'Usuário',
         icon : 'person',
         component: UserComponent,
-    }
+    },
+    {
+        path: 'sub-grupo',
+        caption : 'Sub-Grupo',
+        icon : 'equalizer',
+        component: SubGrupoComponent,
+    },
+    {
+       path: 'colection',
+    caption : 'coleção',
+    icon : 'equalizer',
+    component: ColectionComponent, 
+    },
+    {
+       path: 'produto',
+    caption : 'produto',
+    icon : 'equalizer',
+    component: ProdutoComponent, 
+    },
+    {
+        path: 'cliente',
+     caption : 'cliente',
+     icon : 'equalizer',
+     component: ClienteComponent, 
+     }
 ]

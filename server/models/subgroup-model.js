@@ -12,13 +12,13 @@ module.exports = (sequelize) => {
             autoIncrement : true,
             allowNull : false
         },
-        descrição : {
+        description : {
             type : Sequelize.STRING(200),
             allowNull : false
         },
-        fkgrupo :{
-            type:Sequelize.INTEGER,
-            allowNull:false
+        fkGrupo: {
+            type : Sequelize.INTEGER,
+            allowNull : false
         }
     })
    

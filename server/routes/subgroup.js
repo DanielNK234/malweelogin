@@ -5,15 +5,14 @@ const securityConsts = require('../consts/security-consts');
 
 knl.post('subgroup', async(req, resp) => {
     const schema = Joi.object({
-        produto : Joi.string().min(1).max(50).required(),
-        descrição : Joi.string().min(10).max(200).required()
+        description : Joi.string().min(1).max(200).required()
     })
 
     knl.validate(req.body, schema);
 
     const result = await knl.sequelize().models.subgrupo.findAll({
         where : {
-            tipoproduto : req.body.produto
+            description : req.body.description
         }
     });
 
@@ -21,7 +20,8 @@ knl.post('subgroup', async(req, resp) => {
   ;
 
     const user = knl.sequelize().models.subgrupo.build({
-        tipoproduto : req.body.produto
+        fkGrupo : "1",
+        description : req.body.description
     });
 
     await user.save();
@@ -29,14 +29,14 @@ knl.post('subgroup', async(req, resp) => {
 }, securityConsts.USER_TYPE_PUBLIC);
 
 knl.get('subgroup', async(req, resp) => {
-    const result = await knl.sequelize().models.grupo.findAll({
+    const result = await knl.sequelize().models.subgrupo.findAll({
     });
     resp.send(result)
 });
 
 knl.put('subgroup', async(req, resp) => {
     const result = await knl.sequelize().models.subgrupo.update({
-        tipoproduto:req.body.tipoproduto,
+        description : req.body.description,
     }, {
         where : {
         id : req.body.id
@@ -45,11 +45,24 @@ knl.put('subgroup', async(req, resp) => {
     resp.send(result);
 });
 
-knl.delete('group', async(req, resp) => {
+knl.delete('subgroup', async(req, resp) => {
         const result = await knl.sequelize().models.subgrupo.destroy({
             where : {
                 id : req.body.id
             }
         });
         req.send(user);
+});
+
+knl.patch('subgroup', async(req, resp) => {
+    const result = await knl.sequelize().models.subgrupo.update({
+    fkGrupo:"0"
+    },
+    {
+         where : {
+            id : req.body.id,
+            
+        }
+    });
+    resp.send("result")
 });
