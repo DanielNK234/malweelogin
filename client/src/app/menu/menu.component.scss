@@ -4,7 +4,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: #eee;
+    background: rgb(202, 202, 202);
+    
 }
 
 .nav-content{
@@ -13,12 +14,14 @@
 mat-sidenav{
     background: rgb(17, 17, 17);
     
+    
 }
 mat-icon{
     color: #eee;
 }
 .mat-list-base .mat-list-item {
     color: rgba(255, 255, 255, 0.87);
+         
 }
 
 

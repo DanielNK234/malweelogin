@@ -2,21 +2,20 @@
     padding: 5px 500px;
     
 }
-
-
-
 .row{
 display: flex;
 }
 .box{
     border: 2px solid rgb(0, 0, 0);
-    background: transparent;
     padding: 20px 20px;
-    color: rgb(168, 168, 168);
+    background-color: white;
     text-transform: uppercase;
     margin: 20px;
 }
-
+button{
+  border: hidden;
+  background: none;
+}
 .example-form-field {
     width: 90%;
     padding-right: 2%;
@@ -28,7 +27,7 @@ mat-grid-tile {
     padding-bottom: 20%;
     margin-left: 1%;
   }
-  button{
+button{
     cursor: pointer;
     border: none;
 }
@@ -47,6 +46,12 @@ h1{
 .groups{
   padding-left: 0.7%;
 }
+h1{
+color: black;
+}
+
+
+
 
 
 

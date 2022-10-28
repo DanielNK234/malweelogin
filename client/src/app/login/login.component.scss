@@ -6,7 +6,7 @@
 }
 
 mat-card {
-    background: linear-gradient(#091e2f,#00496b,#147ab5);
+    background-image: linear-gradient(to top, #434343 0%, black 100%);
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -20,10 +20,12 @@ mat-card {
     text-align: center;
 }
 
-
+h1{
+    color: #000;
+}
 
 mat-form-field {
-    width: 80%;
+    width: 100%;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -41,22 +43,24 @@ button{
     background: transparent;
     padding: 10px 50px;
     border-radius: 30px;
-    color: rgb(168, 168, 168);
+    color: rgb(0, 0, 0);
     text-transform: uppercase;
-    border:2px solid rgb(168, 168, 168);
+    border:2px solid rgb(0, 0, 0);
     margin: 20px;
     cursor: pointer;
     transition: ease-in-out .25s;
 }
 
 button:hover{
-    background: #094a80;
+    background: #727272;
 }
 
 mat-card-content{
     width: 350px;
-    background: rgba(1, 1, 26, 0.5);
-    border-radius: 20% 0;
-    box-shadow: 1px 2px 20px #000, 2px 6px 10px #000;
+    background-image: radial-gradient(at top center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
+    background-blend-mode: normal, multiply;
+    border-radius: 3% 3%;
+    box-shadow:  2px 3px 3px #000;
     padding: 50px 20px;
+    border:2px solid rgb(0, 0, 0);
 }

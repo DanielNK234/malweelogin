@@ -1,8 +1,8 @@
-<div class="">
+<div class="box">
 <mat-card-content>
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Pesquisa</mat-label>
-    <input matInput type="text" placeholder="Digite um grupo" [(ngModel)] = 'search'>
+    <input matInput type="text" placeholder="Digite um grupo"  [(ngModel)] = 'search'>
     <button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
       <mat-icon>close</mat-icon>
     </button>
@@ -13,7 +13,8 @@
      
      <br>
    <div class="row text-center" *ngFor="let grupos of grupos | filter : search  ">
-    <button (click)="openPutModal(grupos)"><h1>{{grupos.description}}</h1></button>
+    <button (click)="openPutModal(grupos)"><h1>{{grupos.id}} - {{grupos.description}}</h1></button>
    </div>
   </mat-card-content>
+  </div>
   

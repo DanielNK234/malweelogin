@@ -3,7 +3,7 @@ import { HttpService } from 'src/services/HttpService';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export interface DialogData {
-  grupos: string;
+  description: string;
   id: number;
 }
 
@@ -24,7 +24,7 @@ search: string='';
 id: number | undefined;
 
 constructor(public dialogRef: MatDialogRef<ModelComponent>, private httpService : HttpService,
-  @Inject(MAT_DIALOG_DATA) private data : {id: number, description : string, status : number}) { }
+  @Inject(MAT_DIALOG_DATA) private data : {id: number, description : string}) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -41,7 +41,7 @@ constructor(public dialogRef: MatDialogRef<ModelComponent>, private httpService 
       return;
     }
     this.id = this.data.id,
-    this.description = this.data.description;
+    this.description = this.description;
   }
   async htmlAdd(){
     this.htmladd=1;
@@ -49,8 +49,8 @@ constructor(public dialogRef: MatDialogRef<ModelComponent>, private httpService 
   }
   async groupAdd(){
     console.log("grupo adicionado");
-    console.log(this.data.description);
-    this.grupos = await this.httpService.post('group', { description: this.data.description});
+    console.log(this.description);
+    this.grupos = await this.httpService.post('group', { description: this.description});
 
   }
   deleteGroup(){
@@ -66,7 +66,7 @@ constructor(public dialogRef: MatDialogRef<ModelComponent>, private httpService 
   }
 
   async putGrupo(){
-    this.grupos= await this.httpService.put(`group`, {id : this.data.id, description : this.data.description });
+    this.grupos= await this.httpService.put(`group`, {id : this.id, description : this.description });
   }  
 
 }
