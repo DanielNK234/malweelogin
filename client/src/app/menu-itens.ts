@@ -27,19 +27,19 @@ export const MenuItens = [
     {
        path: 'colection',
     caption : 'coleção',
-    icon : 'equalizer',
+    icon : 'view_list',
     component: ColectionComponent, 
     },
     {
        path: 'produto',
     caption : 'produto',
-    icon : 'equalizer',
+    icon : 'shop',
     component: ProdutoComponent, 
     },
     {
         path: 'cliente',
      caption : 'cliente',
-     icon : 'equalizer',
+     icon : 'person',
      component: ClienteComponent, 
      }
 ]

@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define('coleção', {
+    sequelize.define('colection', {
 
         id : {
             type : Sequelize.INTEGER.UNSIGNED,
@@ -9,8 +9,11 @@ module.exports = (sequelize) => {
             autoIncrement : true,
             allowNull : false
         },
-        descrição : {
+        description : {
             type : Sequelize.STRING(200),
+            allowNull : false
+        },status:{
+            type : Sequelize.INTEGER.UNSIGNED,
             allowNull : false
         }
     })
