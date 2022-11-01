@@ -5,10 +5,10 @@ const securityConsts = require('../consts/security-consts');
 
 knl.post('cliente', async(req, resp) => {
     const schema = Joi.object({
-        nomeFantasia: Joi.string().min(10).max(200).required(),
-        cnpj :Joi.string().min(11).max(1).required(),
-        razãoSocial:Joi.string().min(5).max(100).required(),
-        clienteDesde:Joi.date().raw().required()
+        nomeFantasia: Joi.string().min(1).max(200).required(),
+        cnpj :Joi.string().min(11).max(11).required(),
+        razaoSocial:Joi.string().min(1).max(100).required(),
+        clienteDesde: Joi.date().raw().required()
     })
 
     knl.validate(req.body, schema);
@@ -26,7 +26,7 @@ knl.post('cliente', async(req, resp) => {
         status : "1",
         nomeFantasia: req.body.nomeFantasia,
         cnpj :req.body.cnpj,
-        //razãoSocial:
+        razaoSocial:req.body.razaoSocial,
         clienteDesde:req.body.clienteDesde
     });
 
@@ -36,7 +36,10 @@ knl.post('cliente', async(req, resp) => {
 
 knl.get('cliente', async(req, resp) => {
     const result = await knl.sequelize().models.clientes.findAll({
-    status:req.body.status
+        
+        where : {
+            status : 1,
+        }
     });
     resp.send(result)
 });
@@ -45,7 +48,7 @@ knl.put('cliente', async(req, resp) => {
     const result = await knl.sequelize().models.clientes.update({
         nomeFantasia: req.body.nomeFantasia,
         cnpj :req.body.cnpj,
-        //razãoSocial:
+        razãoSocial:req.body.razaoSocial,
         clienteDesde:req.body.clienteDesde,
     }, {
         where : {

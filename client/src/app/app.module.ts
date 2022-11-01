@@ -26,6 +26,7 @@ import { ProdutoComponent } from './produto/produto.component';
 import { DrpdownComponent } from './drpdown/drpdown.component';
 import { ModelColectionComponent } from './model-colection/model-colection.component';
 import { UsermodelComponent } from './usermodel/usermodel.component';
+import { ModelClienteComponent } from './model-cliente/model-cliente.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { UsermodelComponent } from './usermodel/usermodel.component';
     ProdutoComponent,
     DrpdownComponent,
     ModelColectionComponent,
-    UsermodelComponent
+    UsermodelComponent,
+    ModelClienteComponent
   ],
   imports: [
     RoutesModule,

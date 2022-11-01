@@ -21,12 +21,12 @@ module.exports = (sequelize) => {
             allowNull : false,
             unique: true
         },
-        razãoSocial:{
+        razaoSocial:{
             type : Sequelize.STRING(200),
             allowNull : false   
         },
         clienteDesde:{
-            type:Sequelize.DATE(),
+            type: Sequelize.DATEONLY,
             allowNull:false
 
         }
