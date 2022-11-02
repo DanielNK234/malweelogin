@@ -5,7 +5,7 @@ const securityConsts = require('../consts/security-consts');
 
 knl.post('colection', async(req, resp) => {
     const schema = Joi.object({
-        description : Joi.string().min(10).max(200).required()
+        description : Joi.string().min(1).max(200).required()
     })
 
     knl.validate(req.body, schema);

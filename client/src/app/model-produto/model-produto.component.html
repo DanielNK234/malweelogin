@@ -1,0 +1,50 @@
+<mat-card>
+    <mat-card-content *ngIf="htmladd ==2" >
+      <mat-card-actions class="but">
+       <mat-card-title>
+           <h1>Cadastrar</h1>
+       </mat-card-title> 
+        <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+      </mat-card-actions>
+      <app-drpdown [array]="grupos"  [title]="'Grupo'" [(ngModel)]="selectedGroup"></app-drpdown><br>
+      <app-drpdown [array]="colections"  [title]="'coleção'" [(ngModel)]="selectedColection"></app-drpdown><br>
+      <app-drpdown [array]="subgrupos"  [title]="'SubGrupo'" [(ngModel)]="selectedSubGroup"></app-drpdown><br>
+       <mat-form-field class="example-full-width" appearance="fill">
+         <input matInput placeholder=" Descrição do produto" [(ngModel)]="description">
+       </mat-form-field><br>
+       <mat-form-field class="example-full-width" appearance="fill">
+         <input matInput placeholder="preço da venda" [(ngModel)]="precoVenda">
+       </mat-form-field>
+       <mat-card-actions>
+         <button class="card" mat-raised-button color="black" (click)="ProdutoAdd()" >Cadastrar</button>
+       </mat-card-actions>
+    </mat-card-content>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<mat-card-content *ngIf="htmladd ==1">
+  <mat-card-actions class="but">
+    <mat-card-title>
+    <h1>Editar/Deletar</h1>
+  </mat-card-title>
+    <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+  </mat-card-actions>
+  
+
+  <mat-form-field class="example-full-width" appearance="fill">
+     <input matInput placeholder="Insira o ID" type="number" minlength="1" required [(ngModel)]="id">
+  </mat-form-field><br>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <input matInput placeholder="Insira a nova descrição" type="text"  minlength="1" required [(ngModel)]="description">
+ </mat-form-field>
+   <mat-form-field class="example-full-width" appearance="fill">
+    <input matInput placeholder="Insira o novo preço de venda" type="text"  minlength="1" required [(ngModel)]="precoVenda">
+ </mat-form-field>
+ <mat-card-actions>
+    <button  class="card"mat-raised-button color="black"  (click)="putProduto()">Editar</button>
+    <button class="card" mat-raised-button color="black"  (click)="ProdutoDelete()">Deletar</button>
+    </mat-card-actions>
+
+</mat-card-content>
+</mat-card>
+
