@@ -20,8 +20,8 @@ put: any;
 username: string = '';
 name : string = '';
 usuarios: Array<any>= [];
-password: String='';
-cpassword: String='';
+password: Array<any>= [];
+cpassword: Array<any>= [];
 htmladd: number = 0;
 search: string='';
 id: number | undefined;
@@ -72,7 +72,7 @@ constructor(public dialogRef: MatDialogRef<UsermodelComponent>, private httpServ
   }
 
   public async putUser(){
-    this.usuarios= await this.httpService.put(`user`, {id : this.id, username : this.username });
+    this.usuarios= await this.httpService.put(`user`, {id : this.id, username : this.username,password: this.password });
     this.dialogRef.close();
   }  
 

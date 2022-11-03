@@ -9,7 +9,7 @@
            <mat-form-field class="example-full-width" appearance="fill">
              <input matInput placeholder="Nome da Fantasia" [(ngModel)]="nomeFantasia">
            </mat-form-field>
-           <br>
+             - 
             <mat-form-field class="example-full-width" appearance="fill">
              <input matInput placeholder="CNPJ" [(ngModel)]="cnpj">
            </mat-form-field>
@@ -17,9 +17,9 @@
             <mat-form-field class="example-full-width" appearance="fill">
              <input matInput placeholder="Razão Social" [(ngModel)]="razaoSocial">
            </mat-form-field>
-           <br>
+             - 
             <mat-form-field appearance="fill">
-                    <mat-label>Data Cliente</mat-label>
+                    <mat-label>Cliente Desde</mat-label>
                     <input matInput [matDatepicker]="picker">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>

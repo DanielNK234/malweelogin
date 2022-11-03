@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             allowNull : false
         },
         precoVenda:{
-            type : Sequelize.INTEGER,
+            type : Sequelize.DECIMAL(10,2),
             allowNull : false
 
         },

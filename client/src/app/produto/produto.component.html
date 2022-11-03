@@ -1,3 +1,4 @@
+
 <div class="box">
     <mat-card-content>
       <mat-form-field class="example-form-field" appearance="fill">
@@ -14,7 +15,7 @@
          <br>
        <div class="row text-center" *ngFor="let produtos of produtos | filter : search  ">
         <ng-template [ngIf] = "produtos.fkGrupo != 0">
-        <button (click)="openPutModal(produtos)"><h1>{{produtos.id}} - {{produtos.description}}</h1></button>
+        <button (click)="openPutModal(produtos)"><h1>{{produtos.description}} - {{produtos.precoVenda}}</h1></button>
         </ng-template>
        </div>
       </mat-card-content>

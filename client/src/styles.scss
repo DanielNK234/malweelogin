@@ -3,7 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-dialog-container{
-    border: 2px solid rgb(0, 0, 0);
-    background-color: rgb(218, 218, 218);
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0px;
+
 }
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';

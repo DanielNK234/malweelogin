@@ -1,5 +1,4 @@
 mat-card{
-border: 2px solid rgb(0, 0, 0);
 padding: 20px 20px;
 text-transform: uppercase;
 margin: 20px;}
@@ -9,12 +8,11 @@ h1{
 }
 
 mat-dialog-container{
-    background-color: rgb(84, 84, 84);
-    border: 2px solid rgb(0, 0, 0); 
+    background-color: hidden;
+    border: none;
+    
 }
-.card{
-    border: 2px solid rgb(0, 0, 0);
-}
+
 .card:hover{
     background: #727272;
 }

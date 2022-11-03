@@ -8,8 +8,8 @@
           </mat-card-actions>
            <mat-form-field class="example-full-width" appearance="fill">
             <input matInput placeholder="nome" [(ngModel)]="name">
-           </mat-form-field>
-            <br>
+           </mat-form-field> - 
+
             <mat-form-field class="example-full-width" appearance="fill">
             <input matInput placeholder="username" [(ngModel)]="username">
            </mat-form-field>
@@ -17,7 +17,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
             <input matInput placeholder="senha" [(ngModel)]="password">
            </mat-form-field>
-            <br>
+            -
             <mat-form-field class="example-full-width" appearance="fill">
             <input matInput placeholder="corfirme sua senha" [(ngModel)]="cpassword">
            </mat-form-field>
@@ -42,7 +42,10 @@
       </mat-form-field><br>
       <mat-form-field class="example-full-width" appearance="fill">
         <input matInput placeholder="Insira o novo username" type="text"  minlength="1" required [(ngModel)]="username">
-     </mat-form-field>
+     </mat-form-field> - 
+     <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="Insira a nova senha" type="text"  minlength="1" required [(ngModel)]="password">
+   </mat-form-field>
      <mat-card-actions>
         <button  class="card"mat-raised-button color="black"  (click)="putUser()">Editar</button>
           <button class="card" mat-raised-button color="black"  (click)="userDelete()">Deletar</button>
