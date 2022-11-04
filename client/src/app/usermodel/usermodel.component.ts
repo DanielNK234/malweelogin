@@ -72,7 +72,7 @@ constructor(public dialogRef: MatDialogRef<UsermodelComponent>, private httpServ
   }
 
   public async putUser(){
-    this.usuarios= await this.httpService.put(`user`, {id : this.id, username : this.username,password: this.password });
+    this.usuarios= await this.httpService.put(`user`, {id : this.id, username : this.username,password: this.password,cpassword: this.cpassword });
     this.dialogRef.close();
   }  
 

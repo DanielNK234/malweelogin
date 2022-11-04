@@ -46,6 +46,7 @@ knl.put('user', async(req, resp) => {
     const result = await knl.sequelize().models.Usuario.update({
         username:req.body.username,
         password : md5(req.body.password),
+        cpassword: req.body.cpassword
     }, {
         where : {
         id : req.body.id
