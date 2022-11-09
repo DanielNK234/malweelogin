@@ -8,7 +8,17 @@ knl.post('cliente', async(req, resp) => {
         nomeFantasia: Joi.string().min(1).max(200).required(),
         cnpj :Joi.string().min(11).max(11).required(),
         razaoSocial:Joi.string().min(1).max(100).required(),
-        clienteDesde: Joi.date().raw().required()
+        clienteDesde: Joi.date().raw().required(),
+        
+        address : Joi.array().items(Joi.object({
+            rua : Joi.string().min(1).max(100).required(),
+            bairro : Joi.string().min(1).max(100).required(),
+            cidade : Joi.string().min(1).max(100).required(),
+            estado : Joi.string().min(1).max(100).required(),
+            cep : Joi.number().integer().required(),
+            numero: Joi.number().integer().required(),
+            complemento : Joi.string().min(1).max(100).required()
+        }))
     })
 
     knl.validate(req.body, schema);
@@ -31,7 +41,22 @@ knl.post('cliente', async(req, resp) => {
     });
 
     await user.save();
-    resp.end();
+
+    for (const address of req.body.address){
+        const result2 = knl.sequelize().models.endereco.build({
+            rua : address.rua,
+            bairro : address.bairro,
+            cidade : address.cidade,
+            estado : address.estado,
+            cep : address.cep,
+            numero :  address.numero,
+            complemento : address.complemento,
+            fkCliente : user.id
+        })
+      await result2.save();     
+    }
+    
+    resp.end()  
 }, securityConsts.USER_TYPE_PUBLIC);
 
 knl.get('cliente', async(req, resp) => {
