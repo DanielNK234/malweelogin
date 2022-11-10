@@ -44,14 +44,14 @@ knl.post('cliente', async(req, resp) => {
 
     for (const address of req.body.address){
         const result2 = knl.sequelize().models.endereco.build({
-            rua : address.rua,
-            bairro : address.bairro,
-            cidade : address.cidade,
-            estado : address.estado,
-            cep : address.cep,
-            numero :  address.numero,
-            complemento : address.complemento,
-            fkCliente : user.id
+        rua : address.rua,
+        bairro : address.bairro,
+        cidade : address.cidade,
+        estado : address.estado,
+        cep : address.cep,
+        numero :  address.numero,
+        complemento : address.complemento,
+        fkCliente : user.id
         })
       await result2.save();     
     }
@@ -74,13 +74,16 @@ knl.put('cliente', async(req, resp) => {
         nomeFantasia: req.body.nomeFantasia,
         cnpj :req.body.cnpj,
         razãoSocial:req.body.razaoSocial,
-        clienteDesde:req.body.clienteDesde,
+        clienteDesde:req.body.clienteDesde
     }, {
         where : {
         id : req.body.id
     }});
     
+    
+    
     resp.send(result);
+    resp.send(result2);
 });
 
 knl.delete('cliente', async(req, resp) => {

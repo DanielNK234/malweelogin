@@ -26,6 +26,16 @@ export class ModelClienteComponent implements OnInit {
   htmladd: number = 0;
   search: string='';
   id: number | undefined;
+
+  rua: string = '';
+  bairro: string = '';
+  cidade: string = '';
+  estado: string = '';
+  complemento: string = '';
+  numero: number = 0;
+  cep : number = 0;
+  enderecos : Array<any> = [];
+  endereco : string = '';
   
   constructor(public dialogRef: MatDialogRef<ModelClienteComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : {id: number, nomeFantasia : string,
@@ -52,10 +62,21 @@ export class ModelClienteComponent implements OnInit {
       this.htmladd=1;
   
     }
-    async groupAdd(){
+    async clientAdd(){
       console.log("grupo adicionado");
       console.log(this.nomeFantasia);
-      this.clientes = await this.httpService.post('cliente', {nomeFantasia: this.nomeFantasia,cnpj:this.cnpj,razaoSocial:this.razaoSocial, clienteDesde:this.startDate});
+      this.clientes = await this.httpService.post('cliente', {nomeFantasia: this.nomeFantasia,cnpj:this.cnpj,razaoSocial:this.razaoSocial, clienteDesde:this.startDate,
+         address : [
+          {
+            cep : this.cep,
+            rua : this.rua,
+            bairro : this.bairro,
+            cidade : this.cidade,
+            estado : this.estado,
+            complemento : this.complemento,
+            numero : this.numero
+          }
+        ]});
       this.dialogRef.close();
   
     }
@@ -74,7 +95,18 @@ export class ModelClienteComponent implements OnInit {
     }
   
     public async putGrupo(){
-      this.clientes= await this.httpService.put(`cliente`, {id : this.id, nomeFantasia : this.nomeFantasia });
+      this.clientes= await this.httpService.put(`cliente`, {id : this.id, nomeFantasia : this.nomeFantasia,
+        address : [
+          {
+            cep : this.cep,
+            rua : this.rua,
+            bairro : this.bairro,
+            cidade : this.cidade,
+            estado : this.estado,
+            complemento : this.complemento,
+            numero : this.numero
+          }
+        ]});
       this.dialogRef.close();
     }  
   

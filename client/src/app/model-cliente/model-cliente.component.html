@@ -1,7 +1,10 @@
     <mat-card>
         <mat-card-content *ngIf="htmladd ==2" >
+        <mat-tab-group>  
+        <mat-tab label="cadastro">
           <mat-card-actions class="but">
-           <mat-card-title>
+            
+            <mat-card-title>
                <h1>Cadastrar</h1>
            </mat-card-title> 
             <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
@@ -25,12 +28,71 @@
                     <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
                   </mat-form-field>
            <mat-card-actions>
-             <button class="card" mat-raised-button color="black" (click)="groupAdd()" >Cadastrar</button>
+             <button class="card" mat-raised-button color="black" (click)=" clientAdd()" >Cadastrar</button>
+             <button mat-raised-button (click)="onNoClick()">Cancelar</button>
            </mat-card-actions>
-        </mat-card-content>
+            </mat-tab>
+            <mat-tab label="Endereço">
+              <mat-card-content>
+                <mat-card-actions class="but">
+            
+                  <mat-card-title>
+                     <h1>endereços</h1>
+                 </mat-card-title> 
+                  <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+                </mat-card-actions>
+                  <div mat-dialog-content>
+                      <div class="create">
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label>CEP</mat-label>
+                                  <input matInput placeholder="Ex. 89253520" [(ngModel)]="cep">
+                              </mat-form-field> -
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label>Rua</mat-label>
+                                  <input matInput placeholder="Ex. rua dos lindos" [(ngModel)]="rua">
+                              </mat-form-field>
+  
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label>Bairro</mat-label>
+                                  <input matInput placeholder="Ex. Jaraguá Esquerdo" [(ngModel)]="bairro">
+                              </mat-form-field> - 
+  
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label>Cidade</mat-label>
+                                  <input matInput placeholder="Ex. Jaraguá do Sul" [(ngModel)]="cidade">
+                              </mat-form-field>
+  
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label>Estado</mat-label>
+                                  <input matInput placeholder="Ex. Santa Catarina" [(ngModel)]="estado">
+                              </mat-form-field> - 
+  
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label>Complemento</mat-label>
+                                  <input matInput placeholder="Ex. Apartamento 2" [(ngModel)]="complemento">
+                              </mat-form-field>
+  
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label>Numero</mat-label>
+                                  <input matInput placeholder="Ex. 115" [(ngModel)]="numero">
+                              </mat-form-field>
+              
+                              <div mat-dialog-actions>
+                                  <button mat-raised-button (click) = " clientAdd()">Confirmar</button>
+                                  <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+                              </div>
+              
+                      </div>
+                  </div>
+              </mat-card-content>
+          </mat-tab>
+          </mat-tab-group>
+          </mat-card-content>
+          
 
     <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    
+  <mat-tab-group>
+  <mat-tab label="editar/deletar">
     <mat-card-content *ngIf="htmladd ==1">
       <mat-card-actions class="but">
         <mat-card-title>
@@ -50,6 +112,61 @@
         <button  class="card"mat-raised-button color="black"  (click)="putGrupo()">Editar</button>
           <button class="card" mat-raised-button color="black"  (click)="groupDelete()">Deletar</button>
         </mat-card-actions>
-
     </mat-card-content>
+    </mat-tab>
+    <mat-tab label="Endereço">
+      <mat-card-content>
+        <mat-card-actions class="but">
+    
+          <mat-card-title>
+             <h1>endereços</h1>
+         </mat-card-title> 
+          <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+        </mat-card-actions>
+          <div mat-dialog-content>
+              <div class="create">
+                      <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>CEP</mat-label>
+                          <input matInput placeholder="Ex. 89253520" [(ngModel)]="cep">
+                      </mat-form-field> -
+                      <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Rua</mat-label>
+                          <input matInput placeholder="Ex. rua dos lindos" [(ngModel)]="rua">
+                      </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Bairro</mat-label>
+                          <input matInput placeholder="Ex. Jaraguá Esquerdo" [(ngModel)]="bairro">
+                      </mat-form-field> - 
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Cidade</mat-label>
+                          <input matInput placeholder="Ex. Jaraguá do Sul" [(ngModel)]="cidade">
+                      </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Estado</mat-label>
+                          <input matInput placeholder="Ex. Santa Catarina" [(ngModel)]="estado">
+                      </mat-form-field> - 
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Complemento</mat-label>
+                          <input matInput placeholder="Ex. Apartamento 2" [(ngModel)]="complemento">
+                      </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Numero</mat-label>
+                          <input matInput placeholder="Ex. 115" [(ngModel)]="numero">
+                      </mat-form-field>
+      
+                      <div mat-dialog-actions>
+                        <button  class="card"mat-raised-button color="black"  (click)="putGrupo()">Editar</button>
+                        <button class="card" mat-raised-button color="black"  (click)="groupDelete()">Deletar</button>
+                      </div>
+      
+              </div>
+          </div>
+      </mat-card-content>
+  </mat-tab>
+  </mat-tab-group>
     </mat-card>
