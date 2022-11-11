@@ -26,6 +26,7 @@ export class ModelClienteComponent implements OnInit {
   htmladd: number = 0;
   search: string='';
   id: number | undefined;
+  selectedGroup: number = 0;
 
   rua: string = '';
   bairro: string = '';
@@ -34,7 +35,7 @@ export class ModelClienteComponent implements OnInit {
   complemento: string = '';
   numero: number = 0;
   cep : number = 0;
-  enderecos : Array<any> = [];
+  public enderecos : Array<any> = [];
   endereco : string = '';
   
   constructor(public dialogRef: MatDialogRef<ModelClienteComponent>, private httpService : HttpService,
@@ -46,6 +47,7 @@ export class ModelClienteComponent implements OnInit {
     }
     
     ngOnInit(): void {
+      this.loadendereco()
       console.log(this.data);
       if(this.data.id == null){
         this.htmladd = 2
@@ -62,53 +64,64 @@ export class ModelClienteComponent implements OnInit {
       this.htmladd=1;
   
     }
+
+    async getAddress(){
+      this.enderecos = await this.httpService.get(`cliente/${this.data.id}`);
+    }
+//------------------------------
     async clientAdd(){
       console.log("grupo adicionado");
       console.log(this.nomeFantasia);
-      this.clientes = await this.httpService.post('cliente', {nomeFantasia: this.nomeFantasia,cnpj:this.cnpj,razaoSocial:this.razaoSocial, clienteDesde:this.startDate,
-         address : [
-          {
-            cep : this.cep,
-            rua : this.rua,
-            bairro : this.bairro,
-            cidade : this.cidade,
-            estado : this.estado,
-            complemento : this.complemento,
-            numero : this.numero
-          }
-        ]});
+      this.clientes = await this.httpService.post('cliente', {nomeFantasia: this.nomeFantasia,
+        cnpj:this.cnpj,razaoSocial:this.razaoSocial, clienteDesde:this.startDate,address: this.enderecos});
       this.dialogRef.close();
   
     }
-    deleteGroup(){
+    async addEndereco(){ 
+      this.enderecos.push({'rua' :this.rua, 'bairro' :this.bairro, 'cidade' :this.cidade, 'estado':this.estado,
+        'cep' :this.cep, 'numero' :this.numero, 'complemento' :this.complemento})
+        console.log(this.enderecos);
+        this.reset();
+    }
+    //----------------------------
+    deleteClient(){
       this.htmladd= 2;
     }
-    async listarGroup(){
+    async listarClient(){
       console.log("grupo listado");
       this.clientes= await this.httpService.get('cliente');
      
     }
-    async groupDelete(){
-      console.log("grupo deletado");
+    async clientDelete(){
+      console.log("Cliente deletado");
       this.clientes= await this.httpService.patch(`cliente`,{id : this.id});
       this.dialogRef.close();
     }
-  
-    public async putGrupo(){
-      this.clientes= await this.httpService.put(`cliente`, {id : this.id, nomeFantasia : this.nomeFantasia,
-        address : [
-          {
-            cep : this.cep,
-            rua : this.rua,
-            bairro : this.bairro,
-            cidade : this.cidade,
-            estado : this.estado,
-            complemento : this.complemento,
-            numero : this.numero
-          }
-        ]});
+
+    // <------------------>
+    async putAddress(){
+      this.enderecos = await this.httpService.put('cliente', {rua :this.rua, bairro :this.bairro, cidade :this.cidade,
+         estado :this.estado, cep :this.cep, numero :this.numero, complemento :this.complemento, fkCliente : this.id})
+    }
+
+    public async putClient(){
+      this.clientes= await this.httpService.put(`cliente`, {id : this.id, nomeFantasia : this.nomeFantasia
+        ,address:this.enderecos})
       this.dialogRef.close();
     }  
-  
+    reset(){
+      this.rua          = '';
+      this.bairro       = '';
+      this.cidade       = '';
+      this.estado       = '';
+      this.complemento  = '';
+      this.numero       = 0;
+      this.cep          = 0;
+    }
+
+    async loadendereco(){
+      this.enderecos = await this.httpService.get(`cliente/${this.data.id}`);
+    }
+
 
 }

@@ -45,13 +45,13 @@ knl.post('cliente', async(req, resp) => {
     for (const address of req.body.address){
         const result2 = knl.sequelize().models.endereco.build({
         rua : address.rua,
-        bairro : address.bairro,
-        cidade : address.cidade,
-        estado : address.estado,
-        cep : address.cep,
-        numero :  address.numero,
+        bairro      : address.bairro,
+        cidade      : address.cidade,
+        estado      : address.estado,
+        cep         : address.cep,
+        numero      : address.numero,
         complemento : address.complemento,
-        fkCliente : user.id
+        fkCliente   : user.id
         })
       await result2.save();     
     }
@@ -61,13 +61,21 @@ knl.post('cliente', async(req, resp) => {
 
 knl.get('cliente', async(req, resp) => {
     const result = await knl.sequelize().models.clientes.findAll({
-        
         where : {
             status : 1,
         }
     });
     resp.send(result)
 });
+knl.get('cliente/:id', async(req, resp) => {
+    const user = await knl.sequelize().models.endereco.findAll({
+        where: {
+            fkCliente: req.params.id
+        }
+    });
+    resp.send(user);
+    resp.end();
+}, securityConsts.USER_TYPE_PUBLIC);
 
 knl.put('cliente', async(req, resp) => {
     const result = await knl.sequelize().models.clientes.update({
@@ -79,11 +87,26 @@ knl.put('cliente', async(req, resp) => {
         where : {
         id : req.body.id
     }});
-    
+    for (const address of req.body.address){
+        const result2 = knl.sequelize().models.endereco.update({
+            rua         : address.rua,
+            bairro      : address.bairro,
+            cidade      : address.cidade,
+            estado      : address.estado,
+            cep         : address.cep,
+            complemento : address.complemento,
+            numero      : address.numero  
+            
+        },{
+            where : {
+                fkCliente: result.id
+            }
+        })
+        await result2.save();   
+    }
     
     
     resp.send(result);
-    resp.send(result2);
 });
 
 knl.delete('cliente', async(req, resp) => {
