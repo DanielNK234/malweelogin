@@ -27,7 +27,7 @@ export class ModelClienteComponent implements OnInit {
   search: string='';
   id: number | undefined;
   selectedGroup: number = 0;
-
+  all: Array<any> = [];
   rua: string = '';
   bairro: string = '';
   cidade: string = '';
@@ -47,6 +47,7 @@ export class ModelClienteComponent implements OnInit {
     }
     
     ngOnInit(): void {
+      this.deleteAll()
       this.loadendereco()
       console.log(this.data);
       if(this.data.id == null){
@@ -87,28 +88,53 @@ export class ModelClienteComponent implements OnInit {
     deleteClient(){
       this.htmladd= 2;
     }
-    async listarClient(){
+    async listarCliente(){
       console.log("grupo listado");
       this.clientes= await this.httpService.get('cliente');
      
     }
-    async clientDelete(){
+    // -----------------------------
+    async deleteAll(){
+      this.clienteDelete()
+      this.enderecoDelete()
+    }
+    
+    async clienteDelete(){
       console.log("Cliente deletado");
       this.clientes= await this.httpService.patch(`cliente`,{id : this.id});
       this.dialogRef.close();
     }
-
-    // <------------------>
-    async putAddress(){
-      this.enderecos = await this.httpService.put('cliente', {rua :this.rua, bairro :this.bairro, cidade :this.cidade,
-         estado :this.estado, cep :this.cep, numero :this.numero, complemento :this.complemento, fkCliente : this.id})
+    async enderecoDelete(){
+      console.log("endereço deletado");
+      this.enderecos= await this.httpService.patch(`clientes`,{id : this.selectedGroup});
+      this.dialogRef.close();
     }
 
-    public async putClient(){
-      this.clientes= await this.httpService.put(`cliente`, {id : this.id, nomeFantasia : this.nomeFantasia
-        ,address:this.enderecos})
-      this.dialogRef.close();
-    }  
+
+
+    // <------------------>
+    async putClient(){
+      this.putAddress();
+  
+      if(this.nomeFantasia == ''){
+        this.nomeFantasia = this.data.nomeFantasia;
+      }
+  
+      if(this.razaoSocial == ''){
+        this.razaoSocial = this.data.razaoSocial;
+      }
+  
+      this.clientes = await this.httpService.put('cliente',{nomeFantasia : this.nomeFantasia, razaoSocial : this.razaoSocial,
+        address: this.enderecos, id: this.data.id})
+  
+      this.onNoClick();
+    }
+  
+    async putAddress(){
+      this.enderecos.push({rua :this.rua, bairro :this.bairro, cidade :this.cidade,
+         estado :this.estado, cep :this.cep, numero :this.numero, complemento :this.complemento, id : this.selectedGroup})
+    }
+    //-----------------------
     reset(){
       this.rua          = '';
       this.bairro       = '';

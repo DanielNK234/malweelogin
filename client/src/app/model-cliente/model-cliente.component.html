@@ -94,9 +94,13 @@
         </mat-tab>
           </mat-tab-group>
     </mat-card-content>
+  </mat-card>
           
 
-    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------->
+
+
+  <mat-card>
   <mat-tab-group>
   <mat-tab label="editar/deletar">
     <mat-card-content *ngIf="htmladd ==1">
@@ -115,8 +119,7 @@
         <input matInput placeholder="Insira a nova nome da Fantasia" type="text"  minlength="1" required [(ngModel)]="nomeFantasia">
      </mat-form-field>
      <mat-card-actions>
-        <button  class="card"mat-raised-button color="black"  (click)="putClient()">Editar</button>
-          <button class="card" mat-raised-button color="black"  (click)="clientDelete()">Deletar</button>
+          <button class="card" mat-raised-button color="black"  (click)="clienteDelete()">Deletar</button>
         </mat-card-actions>
     </mat-card-content>
     </mat-tab>
@@ -167,18 +170,23 @@
                       </mat-form-field>
       
                       <div mat-dialog-actions>
-                        <button  class="card"mat-raised-button color="black"  (click)="putClient()">Editar</button>
-                        <button class="card" mat-raised-button color="black"  (click)="clientDelete()">Deletar</button>
+                        <button class="card" mat-raised-button color="black"  (click)="enderecoDelete()">Deletar</button>
                       </div>
-      
               </div>
           </div>
       </mat-card-content>
   </mat-tab>
-  <mat-tab label="lista de endereços">
-    <div class="Cliente" *ngFor="let enderecos of enderecos">
-        <h1>{{enderecos.rua}} - {{enderecos.bairro}} - {{enderecos.cidade}} - {{enderecos.estado}}</h1>
-      </div>
-</mat-tab>
+          <mat-tab label="lista de endereços">
+              <div class="Cliente" *ngFor="let enderecos of enderecos" >
+                   <h1>{{enderecos.rua}} - {{enderecos.bairro}} - {{enderecos.cidade}} - {{enderecos.estado}}</h1>
+                </div>
+          </mat-tab>
+          <mat-tab label="confirmar">
+            <div mat-dialog-actions>
+                <button mat-raised-button (click) = "putClient()">Atualizar tudo</button>
+                 <button mat-raised-button (click) = "deleteAll()">Deletar tudo</button>
+                <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+            </div>
+        </mat-tab>
   </mat-tab-group>
     </mat-card>

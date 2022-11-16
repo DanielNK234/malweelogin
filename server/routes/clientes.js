@@ -37,7 +37,8 @@ knl.post('cliente', async(req, resp) => {
         nomeFantasia: req.body.nomeFantasia,
         cnpj :req.body.cnpj,
         razaoSocial:req.body.razaoSocial,
-        clienteDesde:req.body.clienteDesde
+        clienteDesde:req.body.clienteDesde,
+        status:"1"
     });
 
     await user.save();
@@ -70,7 +71,8 @@ knl.get('cliente', async(req, resp) => {
 knl.get('cliente/:id', async(req, resp) => {
     const user = await knl.sequelize().models.endereco.findAll({
         where: {
-            fkCliente: req.params.id
+            fkCliente: req.params.id,
+            status:1
         }
     });
     resp.send(user);
@@ -86,7 +88,8 @@ knl.put('cliente', async(req, resp) => {
     }, {
         where : {
         id : req.body.id
-    }});
+        }      
+    });
     for (const address of req.body.address){
         const result2 = knl.sequelize().models.endereco.update({
             rua         : address.rua,
@@ -95,18 +98,15 @@ knl.put('cliente', async(req, resp) => {
             estado      : address.estado,
             cep         : address.cep,
             complemento : address.complemento,
-            numero      : address.numero  
-            
+            numero      : address.numero
         },{
             where : {
-                fkCliente: result.id
+                id: address.id
             }
         })
-        await result2.save();   
     }
     
-    
-    resp.send(result);
+    resp.end();
 });
 
 knl.delete('cliente', async(req, resp) => {
@@ -127,4 +127,15 @@ knl.patch('cliente', async(req, resp) => {
         }
     });
     resp.send("result")
+});
+
+knl.patch('clientes', async(req, resp) => {
+    const results = await knl.sequelize().models.endereco.update({
+    status:"0"
+    },{
+         where : {
+            id : req.body.id,
+        }
+    });
+    resp.send("results")
 });

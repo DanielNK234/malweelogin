@@ -38,6 +38,10 @@ module.exports = (sequelize) => {
         numero : {
             type : Sequelize.INTEGER(),
             allowNull : false
+        },
+        status :{
+            type: Sequelize.STRING(100),
+            allowNull : false
         }
 })
 }
