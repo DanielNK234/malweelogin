@@ -51,9 +51,9 @@ export class ModelClienteComponent implements OnInit {
       this.loadendereco()
       console.log(this.data);
       if(this.data.id == null){
-        this.htmladd = 2
-      }else{
         this.htmladd = 1
+      }else{
+        this.htmladd = 2
       }
       if (!this.data){
         return;
@@ -85,14 +85,16 @@ export class ModelClienteComponent implements OnInit {
         this.reset();
     }
     //----------------------------
-    deleteClient(){
-      this.htmladd= 2;
-    }
+
     async listarCliente(){
       console.log("grupo listado");
       this.clientes= await this.httpService.get('cliente');
      
     }
+
+       deleteClient(){
+      this.htmladd= 2;
+    } 
     // -----------------------------
     async deleteAll(){
       this.clienteDelete()

@@ -1,5 +1,6 @@
+    <!----------------------------------------------------------------------------------------------------->
     <mat-card>
-        <mat-card-content *ngIf="htmladd ==2" >
+        <mat-card-content *ngIf="htmladd ==1" >
         <mat-tab-group>  
         <mat-tab label="cadastro">
           <mat-card-actions class="but">
@@ -21,10 +22,11 @@
              <input matInput placeholder="Razão Social" [(ngModel)]="razaoSocial">
            </mat-form-field>
              - 
-            <mat-form-field appearance="fill">
+            <mat-form-field calss = "dat" appearance="fill">
                     <mat-label>Cliente Desde</mat-label>
                     <input matInput [matDatepicker]="picker">
                     <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
                   </mat-form-field>
            <mat-card-actions>
@@ -34,15 +36,15 @@
             </mat-tab>
             <mat-tab label="Endereço">
               <mat-card-content>
-                <mat-card-actions class="but">
+                <mat-card-actions class="butl">
             
                   <mat-card-title>
                      <h1>endereços</h1>
                  </mat-card-title> 
-                  <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+                  <button class="butls" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
                 </mat-card-actions>
                   <div mat-dialog-content>
-                      <div class="create">
+                      <div class="crearte">
                               <mat-form-field class="example-full-width" appearance="fill">
                                   <mat-label>CEP</mat-label>
                                   <input matInput placeholder="Ex. 89253520" [(ngModel)]="cep">
@@ -81,7 +83,6 @@
                                   <button mat-raised-button (click) = " addEndereco()">Confirmar</button>
                                   <button mat-raised-button (click)="onNoClick()">Cancelar</button>
                               </div>
-              
                       </div>
                   </div>
               </mat-card-content>
@@ -103,7 +104,7 @@
   <mat-card>
   <mat-tab-group>
   <mat-tab label="editar/deletar">
-    <mat-card-content *ngIf="htmladd ==1">
+    <mat-card-content *ngIf="htmladd ==2">
       <mat-card-actions class="but">
         <mat-card-title>
         <h1>Editar/Deletar</h1>
@@ -189,4 +190,6 @@
             </div>
         </mat-tab>
   </mat-tab-group>
-    </mat-card>
+</mat-card>
+
+    <!----------------------------------------------------------------------------------------------------->

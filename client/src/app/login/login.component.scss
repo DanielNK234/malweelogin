@@ -6,7 +6,7 @@
 }
 
 mat-card {
-    background-image: linear-gradient(to top, #434343 0%, black 100%);
+    background-image: linear-gradient(to left, #4e4e4e 0%, black 110%);
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -57,7 +57,7 @@ button:hover{
 
 mat-card-content{
     width: 350px;
-    background-image: radial-gradient(at top center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
+    background-image: radial-gradient(at right, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to right, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
     background-blend-mode: normal, multiply;
     border-radius: 3% 3%;
     box-shadow:  2px 3px 3px #000;

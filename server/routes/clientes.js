@@ -38,7 +38,6 @@ knl.post('cliente', async(req, resp) => {
         cnpj :req.body.cnpj,
         razaoSocial:req.body.razaoSocial,
         clienteDesde:req.body.clienteDesde,
-        status:"1"
     });
 
     await user.save();
@@ -52,7 +51,8 @@ knl.post('cliente', async(req, resp) => {
         cep         : address.cep,
         numero      : address.numero,
         complemento : address.complemento,
-        fkCliente   : user.id
+        fkCliente   : user.id,
+        status      : "1"
         })
       await result2.save();     
     }
