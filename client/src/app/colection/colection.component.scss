@@ -49,7 +49,42 @@ h1{
 h1{
 color: black;
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: rgb(182, 182, 182);
+  border:10px black;
+}
+th {
+padding: 8px;
+text-align: center;
+color:black;
+border-bottom: 3px solid black;
+padding: 15px;
 
+
+
+}
+
+td {
+  padding: 8px;
+  text-align: center;
+  bottom: 1px solid #ddd;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+td:hover{
+border-bottom: 3px solid rgb(90, 90, 90);
+}
+
+tr{
+  border-radius: 5px;
+}
 
 
 

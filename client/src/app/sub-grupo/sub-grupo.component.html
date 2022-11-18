@@ -12,10 +12,17 @@
     </button>
          
          <br>
-       <div class="row text-center" *ngFor="let subgrupos of subgrupos | filter : search  ">
-        <ng-template [ngIf] = "subgrupos.fkGrupo != 0">
-        <button (click)="openPutModal(subgrupos)"><h1>{{subgrupos.id}} - {{subgrupos.description}}</h1></button>
-        </ng-template>
-       </div>
+         <table>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+          </tr>
+          <tr  *ngFor="let subgrupos of subgrupos  | filter : search">
+            <ng-template [ngIf] = "subgrupos.fkGrupo != 0"> 
+              <td (click)="openPutModal(subgrupos)">{{subgrupos.id}}</td>
+              <td (click)="openPutModal(subgrupos)">{{subgrupos.description}}</td>
+            </ng-template>
+          </tr>
+         </table>
       </mat-card-content>
       </div>

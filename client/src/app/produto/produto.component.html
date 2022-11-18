@@ -13,10 +13,18 @@
     </button>
          
          <br>
-       <div class="row text-center" *ngFor="let produtos of produtos | filter : search  ">
-        <ng-template [ngIf] = "produtos.fkGrupo != 0">
-        <button (click)="openPutModal(produtos)"><h1>{{produtos.description}} - {{produtos.precoVenda}}</h1></button>
-        </ng-template>
-       </div>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+          </tr>
+          
+          <tr  *ngFor="let produtos of produtos  | filter : search">
+           <ng-template [ngIf] = "produtos.fkGrupo != 0"> 
+              <td (click)="openPutModal(produtos)">{{produtos.description}}</td>
+              <td (click)="openPutModal(produtos)">{{produtos.precoVenda}}</td>
+            </ng-template>
+          </tr>
+         </table>
       </mat-card-content>
       </div>

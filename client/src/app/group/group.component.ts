@@ -27,6 +27,7 @@ ngOnInit(): void {
   this.get();
 }
 
+
 openPutModal(grupos : any): void {
   const ref = this.dialog.open(ModelComponent, {
     width: '550px',

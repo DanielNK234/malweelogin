@@ -178,9 +178,21 @@
       </mat-card-content>
   </mat-tab>
           <mat-tab label="lista de endereços">
-              <div class="Cliente" *ngFor="let enderecos of enderecos" >
-                   <h1>{{enderecos.rua}} - {{enderecos.bairro}} - {{enderecos.cidade}} - {{enderecos.estado}}</h1>
-                </div>
+            <table>
+              <tr>
+                <th>rua</th>
+                <th>bairro</th>
+                <th>cidade</th>
+                <th>estado</th>
+              </tr>
+              <tr  *ngFor="let enderecos of enderecos  | filter : search">
+                  <td >{{enderecos.rua}}</td>
+                  <td >{{enderecos.bairro}}</td>
+                  <td >{{enderecos.cidade}}</td>
+                  <td >{{enderecos.estado}}</td>
+              </tr>
+          
+             </table>
           </mat-tab>
           <mat-tab label="confirmar">
             <div mat-dialog-actions>

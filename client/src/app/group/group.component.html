@@ -12,9 +12,17 @@
 </button>
      
      <br>
-   <div class="row text-center" *ngFor="let grupos of grupos | filter : search  ">
-    <button (click)="openPutModal(grupos)"><h1>{{grupos.id}} - {{grupos.description}}</h1></button>
-   </div>
+     <table>
+      <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+      </tr>
+      <tr  *ngFor="let grupos of grupos  | filter : search">
+          <td (click)="openPutModal(grupos)">{{grupos.id}}</td>
+          <td (click)="openPutModal(grupos)">{{grupos.description}}</td>
+      </tr>
+  
+     </table>
   </mat-card-content>
   </div>
   

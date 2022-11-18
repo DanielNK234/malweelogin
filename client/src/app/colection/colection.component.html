@@ -12,9 +12,17 @@
 </button>
      
      <br>
-   <div class="row text-center" *ngFor="let colections of colections | filter : search  ">
-    <button (click)="openPutModal(colections)"><h1>{{colections.id}} - {{colections.description}}</h1></button>
-   </div>
+     <table>
+      <tr>
+        <th>ID</th>
+        <th>coleção</th>
+      </tr>
+      <tr  *ngFor="let colections of colections  | filter : search">
+          <td (click)="openPutModal(colections)">{{colections.id}}</td>
+          <td (click)="openPutModal(colections)">{{colections.description}}</td>
+      </tr>
+  
+     </table>
   </mat-card-content>
   </div>
   
