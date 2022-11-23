@@ -16,12 +16,12 @@
           <tr>
             <th>ID</th>
             <th>Descrição</th>
+            <th>Grupo</th>
           </tr>
           <tr  *ngFor="let subgrupos of subgrupos  | filter : search">
-            <ng-template [ngIf] = "subgrupos.fkGrupo != 0"> 
               <td (click)="openPutModal(subgrupos)">{{subgrupos.id}}</td>
               <td (click)="openPutModal(subgrupos)">{{subgrupos.description}}</td>
-            </ng-template>
+              <td (click)="openPutModal(subgrupos)">{{subgrupos.group_description}}</td>
           </tr>
          </table>
       </mat-card-content>

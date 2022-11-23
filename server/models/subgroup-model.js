@@ -19,6 +19,10 @@ module.exports = (sequelize) => {
         fkGrupo: {
             type : Sequelize.INTEGER,
             allowNull : false
+        },
+        status:{
+            type : Sequelize.STRING(1),
+            allowNull: false
         }
     })
    

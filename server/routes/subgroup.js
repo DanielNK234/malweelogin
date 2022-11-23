@@ -5,7 +5,8 @@ const securityConsts = require('../consts/security-consts');
 
 knl.post('subgroup', async(req, resp) => {
     const schema = Joi.object({
-        description : Joi.string().min(1).max(200).required()
+        description : Joi.string().min(1).max(200).required(),
+        fkGrupo: Joi.number().required()
     })
 
     knl.validate(req.body, schema);
@@ -20,8 +21,9 @@ knl.post('subgroup', async(req, resp) => {
   ;
 
     const user = knl.sequelize().models.subgrupo.build({
-        fkGrupo : "1",
-        description : req.body.description
+       fkGrupo:req.body.fkGrupo,
+        description : req.body.description,
+        status:"1"
     });
 
     await user.save();
@@ -29,8 +31,27 @@ knl.post('subgroup', async(req, resp) => {
 }, securityConsts.USER_TYPE_PUBLIC);
 
 knl.get('subgroup', async(req, resp) => {
-    const result = await knl.sequelize().models.subgrupo.findAll({
+    let result = await knl.sequelize().models.subgrupo.findAll({
+        status:"1"
     });
+
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let subGrupo of result){
+            const group = await knl.sequelize().models.grupo.findAll({
+                where : {
+                    id : subGrupo.fkGrupo
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(group)){
+                subGrupo.group_description = group[0].description
+            }
+
+            console.log(subGrupo.group_description)
+        }
+    }
     resp.send(result)
 });
 

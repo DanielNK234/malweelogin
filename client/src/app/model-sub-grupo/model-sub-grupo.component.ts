@@ -54,7 +54,7 @@ constructor(public dialogRef: MatDialogRef<ModelSubGrupoComponent>, private http
   async subGroupAdd(){
     console.log("Sub-grupo adicionado");
     console.log(this.description);
-    this.subgrupos = await this.httpService.post('subgroup', { description: this.description});
+    this.subgrupos = await this.httpService.post('subgroup', { description: this.description, fkGrupo:this.selectedGroup});
     this.dialogRef.close();
 
   }
