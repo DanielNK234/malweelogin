@@ -115,6 +115,18 @@ export class ModelClienteComponent implements OnInit {
 
 
     // <------------------>
+    async putCliente(){
+      this.clientes = await this.httpService.put('cliente',{nomeFantasia : this.nomeFantasia, razaoSocial : this.razaoSocial,
+      id: this.data.id})
+      if(this.nomeFantasia == ''){
+        this.nomeFantasia = this.data.nomeFantasia;
+      }
+  
+      if(this.razaoSocial == ''){
+        this.razaoSocial = this.data.razaoSocial;
+      }
+  
+    }
     async putClient(){
       this.putAddress();
   

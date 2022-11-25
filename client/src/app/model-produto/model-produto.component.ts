@@ -38,10 +38,10 @@ export class ModelProdutoComponent implements OnInit {
       this.dialogRef.close();
     }
     
-    ngOnInit(): void {
-      this.loadGrupo(),
-      this.loadSubGrupo(),
-      this.loadcolection()
+    async ngOnInit(){
+     await this.loadGrupo(),
+     await this.loadSubGrupo(),
+     await this.loadcolection()
       console.log(this.data);
       if(this.data.id == null){
         this.htmladd = 2

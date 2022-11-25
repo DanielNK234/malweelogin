@@ -13,33 +13,35 @@ export const MenuItens = [
         component: GroupComponent,
     },
     {
-        path: 'user',
-        caption : 'Usuário',
-        icon : 'person',
-        component: UserComponent,
-    },
-    {
         path: 'sub-grupo',
         caption : 'Sub-Grupo',
         icon : 'equalizer',
         component: SubGrupoComponent,
     },
     {
-       path: 'colection',
-    caption : 'coleção',
-    icon : 'view_list',
-    component: ColectionComponent, 
-    },
-    {
-       path: 'produto',
-    caption : 'produto',
-    icon : 'shop',
-    component: ProdutoComponent, 
-    },
-    {
+        path: 'colection',
+     caption : 'coleção',
+     icon : 'view_list',
+     component: ColectionComponent, 
+     }, 
+     {
+        path: 'produto',
+     caption : 'produto',
+     icon : 'shop',
+     component: ProdutoComponent, 
+     },   {
         path: 'cliente',
      caption : 'cliente',
      icon : 'person',
      component: ClienteComponent, 
-     }
+     },
+    
+    {
+        path: 'user',
+        caption : 'Usuário',
+        icon : 'person',
+        component: UserComponent,
+    }
+    
 ]
+ 

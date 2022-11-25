@@ -18,17 +18,19 @@
         </mat-card-content>
 
     <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    
-    <mat-card-content *ngIf="htmladd ==1">
+  <mat-card-content *ngIf="htmladd ==1">
+    <mat-accordion>
       <mat-card-actions class="but">
-        <mat-card-title>
-        <h1>Editar/Deletar</h1>
-      </mat-card-title>
-        <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+      <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
       </mat-card-actions>
-      
 
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Editar
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+            <mat-form-field class="example-full-width" appearance="fill">
          <input matInput placeholder="Insira o ID" type="number" minlength="1" required [(ngModel)]="id">
       </mat-form-field><br>
       <mat-form-field class="example-full-width" appearance="fill">
@@ -36,8 +38,18 @@
      </mat-form-field>
      <mat-card-actions>
         <button  class="card"mat-raised-button color="black"  (click)="putGrupo()">Editar</button>
-          <button class="card" mat-raised-button color="black"  (click)="groupDelete()">Deletar</button>
         </mat-card-actions>
+      </mat-expansion-panel>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          deletar
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Você realmente deseja deletar este grupo?</p>
+      <button  class="card"mat-raised-button color="black"  (click)="groupDelete()" (click)=" onNoClick()">deletar</button>
+    </mat-expansion-panel>
+  </mat-accordion> 
+</mat-card-content>
 
-    </mat-card-content>
     </mat-card>
