@@ -1,0 +1,92 @@
+.groupt{
+    padding: 5px 500px;
+    
+}
+.row{
+display: flex;
+}
+.box{
+
+    padding: 20px 20px;
+    background-color: white;
+    text-transform: uppercase;
+    margin: 20px;
+}
+button{
+  border: hidden;
+  background: none;
+}
+.example-form-field {
+    width: 90%;
+    padding-right: 2%;
+    padding-left: 1%;
+  }
+mat-grid-tile {
+    background: lightblue;
+    padding-left: 45%;
+    padding-bottom: 20%;
+    margin-left: 1%;
+  }
+button{
+    cursor: pointer;
+    border: none;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+h1{
+  font-family: "Neo Sans", sans-serif;
+}
+.groups{
+  padding-left: 0.7%;
+}
+h1{
+color: black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: rgb(182, 182, 182);
+  border:10px black;
+}
+th {
+padding: 8px;
+text-align: center;
+color:black;
+border-bottom: 3px solid black;
+padding: 15px;
+
+
+
+}
+
+td {
+  padding: 8px;
+  text-align: center;
+  bottom: 1px solid #ddd;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+td:hover{
+border-bottom: 3px solid rgb(90, 90, 90);
+}
+
+tr{
+  border-radius: 5px;
+}
+
+
+
+

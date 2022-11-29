@@ -1,0 +1,33 @@
+<div class="box">
+    <mat-card-content>
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Pesquisa</mat-label>
+        <input matInput type="text" placeholder="Digite um grupo"  [(ngModel)] = 'search'>
+        <button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button>
+      <button (click)="openPutModal(pedidos)"><mat-icon>add</mat-icon></button>
+    </button>
+         
+         <br>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>clientes</th>
+            <th>data de emissão</th>
+            <th>data de entrega</th>
+          </tr>
+          
+          <tr  *ngFor="let pedidos of pedidos  | filter : search">
+           <ng-template [ngIf] = "pedidos.fkGrupo != 0"> 
+              <td (click)="openPutModal(pedidos)">{{pedidos.id}}</td>
+               <td (click)="openPutModal(pedidos)">{{pedidos.cliente_nomeFantasia}}</td>
+              <td (click)="openPutModal(pedidos)">{{pedidos.dtEmissao}}</td>
+              <td (click)="openPutModal(pedidos)">{{pedidos.dtEntrega}}</td>
+            </ng-template>
+          </tr>
+         </table>
+      </mat-card-content>
+      </div>
