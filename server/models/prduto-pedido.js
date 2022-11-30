@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             allowNull:false
         },
         description:{
-            type : Sequelize.STRING(),
+            type : Sequelize.STRING(999),
             allowNull: false
         },
         acrescimo:{

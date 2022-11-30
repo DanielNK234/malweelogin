@@ -3,16 +3,24 @@ const md5 = require('../utils/md5-pass');
 const knl = require('../knl');
 const { Op } = require("sequelize")
 const securityConsts = require('../consts/security-consts');
+const { json } = require('sequelize');
 
 knl.post('pedido', async(req, resp) => {
     const schema = Joi.object({
         dtEntrega : Joi.date().raw().required(),
         dtEmissao : Joi.date().raw().required(),
+        total : Joi.number(),
+        fkCliente: Joi.number().required(),
+        fkEndereco: Joi.number().required(),
         
-    poPedido        : Joi.array().items(Joi.object({
-        description : Joi.string().min(1).max().required(),
-        quantidade  : Joi.number().min(1).max().required(),
-        acrescimo   : Joi.number().min(1).max().required()
+    proPedido       : Joi.array().items(Joi.object({
+        description : Joi.string().min(1).max(200).required(),
+        quantidade  : Joi.number().required(),
+        acrescimo   : Joi.number().required(),
+        vlUnitario :  Joi.number().required(),
+        total : Joi.number().required(),
+        fkProduto: Joi.number().required(),
+        fkPedido: Joi.number().required()
             
         }))
     })
@@ -21,8 +29,7 @@ knl.post('pedido', async(req, resp) => {
 
     const result = await knl.sequelize().models.pedido.findAll({
         where : {
-            dtEmissao : req.body.dtEmissao,
-            dtEntrega : req.body.dtEntrega
+            dtEmissao : req.body.dtEmissao
         }
     });
 
@@ -31,17 +38,23 @@ knl.post('pedido', async(req, resp) => {
 
     const user = knl.sequelize().models.pedido.build({
         dtEmissao : req.body.dtEmissao,
-        dtEntrega : req.body.dtEntrega
+        dtEntrega : req.body.dtEntrega,
+        fkCliente : req.body.fkCliente,
+        fkEndereco: req.body.fkEndereco,
+        total: 50
     });
 
     await user.save();
 
     for (const proPedido of req.body.proPedido){
         const result2 = knl.sequelize().models.proPedido.build({
-        description : proPedido.description,
+        fkProduto: proPedido.fkProduto,  
+        vlUnitario: proPedido.vlUnitario,
         quantidade  : proPedido.quantidade,
         acrescimo   : proPedido.acrescimo,
-        fkCliente   : user.pedido
+        description : proPedido.description,
+        fkPedido : proPedido.fkPedido,
+        total: proPedido.total
         })
       await result2.save();     
     }
@@ -77,7 +90,7 @@ knl.get('pedido', async(req, resp) => {
         }
     }
     resp.send(result)
-    resp.send(result)
+
 
 });
 knl.get('pedido/:id', async(req, resp) => {

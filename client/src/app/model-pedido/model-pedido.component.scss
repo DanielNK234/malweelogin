@@ -1,0 +1,77 @@
+mat-card{
+   
+    padding: 10px 10px;
+    text-transform: uppercase;
+    margin: 10px;
+}
+    
+    h1{
+        color: black;
+    }
+    
+    mat-dialog-container{
+        background-color: rgb(84, 84, 84);
+
+    }
+    mat-card-title{
+        padding: 8px;
+    }
+    .mat-dialog-content{
+        padding: 20px;
+    }
+    .card:hover{
+        background: #727272;
+    }
+    .but{
+        border: none;
+        background: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    
+    }
+    .buts{
+        cursor: pointer;
+        background: none;
+        border: none;
+    
+    }
+
+    .dat{
+        padding: 50%;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        padding: 15px;
+        border-radius: 5px;
+        border:10px black;
+      }
+      th {
+      padding: 8px;
+      text-align: center;
+      color:black;
+      border-bottom: 3px solid black;
+      padding: 15px;
+      
+      
+      
+      }
+      
+      td {
+        padding: 8px;
+        text-align: center;
+        bottom: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        cursor: pointer;
+      }
+      
+      td:hover{
+      border-bottom: 3px solid rgb(90, 90, 90);
+      }
+      
+      tr{
+        border-radius: 5px;
+      }

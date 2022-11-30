@@ -6,17 +6,29 @@
        </mat-card-title> 
         <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
       </mat-card-actions>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <input matInput placeholder=" Descrição do produto" [(ngModel)]="description">
-      </mat-form-field> -
-      <mat-form-field class="example-full-width" appearance="fill">
-        <input matInput placeholder="preço da venda" [(ngModel)]="precoVenda">
+      <mat-form-field calss = "dat" appearance="fill">
+        <mat-label>Data de Emissão</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
       </mat-form-field>
-      <app-drpdown [array]="Client"  [title]="'cliente'" [(ngModel)]="selectedClient"></app-drpdown><br>
-      <!-- <app-drpdown [array]="Endereco"  [title]="'Endereço'"  [(ngModel)]="selectedSubEndereco"></app-drpdown><br> -->
+      
+      <mat-form-field calss = "dat" appearance="fill">
+        <mat-label>Data de Emissão</mat-label>
+        <input matInput [matDatepicker]="picker1">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle  matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1 startView="year" [startAt]="lastDate"></mat-datepicker>
+      </mat-form-field>
+      
+
+
+      <app-drpdown [array]="Client"  [title]="'cliente'" [textField]="'nomeFantasia'" [(ngModel)]="selectedClient"></app-drpdown><br>
+      <app-drpdown [array]="Endereco"  [title]="'Endereço'"  [textField]="'rua'" [(ngModel)]="selectedEndereco"></app-drpdown><br> 
 
        <mat-card-actions>
-         <button class="card" mat-raised-button color="black" (click)="ProdutoAdd()" >Cadastrar</button>
+         <button class="card" mat-raised-button color="black" (click)="PedidoAdd()" >Cadastrar</button>
        </mat-card-actions>
     </mat-card-content>
 
@@ -35,14 +47,14 @@
      <input matInput placeholder="Insira o ID" type="number" minlength="1" required [(ngModel)]="id">
   </mat-form-field><br>
   <mat-form-field class="example-full-width" appearance="fill">
-    <input matInput placeholder="Insira a nova descrição" type="text"  minlength="1" required [(ngModel)]="description">
+    <input matInput placeholder="Insira a nova data de Emissao" type="text"  minlength="1" required [(ngModel)]="dtEmissao">
  </mat-form-field> - 
    <mat-form-field class="example-full-width" appearance="fill">
-    <input matInput placeholder="Insira o novo preço de venda" type="text"  minlength="1" required [(ngModel)]="precoVenda">
+    <input matInput placeholder="Insira a nova data de entrega" type="text"  minlength="1" required [(ngModel)]="dtEntrega">
  </mat-form-field>
  <mat-card-actions>
-    <button  class="card"mat-raised-button color="black"  (click)="putProduto()">Editar</button>
-    <button class="card" mat-raised-button color="black"  (click)="ProdutoDelete()">Deletar</button>
+    <button  class="card"mat-raised-button color="black"  (click)="putPedido()">Editar</button>
+    <button class="card" mat-raised-button color="black"  (click)="PedidoDelete()">Deletar</button>
     </mat-card-actions>
 
 </mat-card-content>
