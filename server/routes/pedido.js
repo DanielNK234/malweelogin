@@ -28,20 +28,19 @@ knl.post('pedido', async(req, resp) => {
     knl.validate(req.body, schema);
 
     const result = await knl.sequelize().models.pedido.findAll({
-        where : {
-            dtEmissao : req.body.dtEmissao
-        }
+
     });
 
-    knl.createException('0006', '', !knl.objects.isEmptyArray(result));
-  ;
+//     knl.createException('0006', '', !knl.objects.isEmptyArray(result));
+//   ;
 
     const user = knl.sequelize().models.pedido.build({
         dtEmissao : req.body.dtEmissao,
         dtEntrega : req.body.dtEntrega,
         fkCliente : req.body.fkCliente,
         fkEndereco: req.body.fkEndereco,
-        total: 50
+        total: 50,
+        status:0
     });
 
     await user.save();
@@ -65,10 +64,11 @@ knl.post('pedido', async(req, resp) => {
 knl.get('pedido', async(req, resp) => {
     let result = await knl.sequelize().models.pedido.findAll({
         where : {
-            id:{
-                [Op.ne]:0
+            status:1
+            // id:{
+            //     [Op.ne]:0
 
-                }
+            //     }
             }
     });
     
@@ -76,7 +76,7 @@ knl.get('pedido', async(req, resp) => {
 
     if (!knl.objects.isEmptyArray(result)){
         for(let propedidos of result){
-            const client = await knl.sequelize().models.cliente.findAll({
+            const client = await knl.sequelize().models.clientes.findAll({
                 where : {
                     id : propedidos.fkCliente
                 }
@@ -89,18 +89,19 @@ knl.get('pedido', async(req, resp) => {
             console.log( propedidos.cliente_nomeFantasia)
         }
     }
-    resp.send(result)
+resp.send(result)
 
 
-});
+}, securityConsts.USER_TYPE_PUBLIC);
 knl.get('pedido/:id', async(req, resp) => {
     const user = await knl.sequelize().models.proPedido.findAll({
         where: {
             fkCliente: req.params.id,
             where : {
-                id:{
-                    [Op.ne]:0
-                    }
+                status:1
+                // id:{
+                //     [Op.ne]:0
+                //     }
                 }
         }
     });
@@ -141,9 +142,9 @@ knl.delete('pedido', async(req, resp) => {
         resp.send(result);
 });
 
-knl.patch('cliente', async(req, resp) => {
+knl.patch('pedido', async(req, resp) => {
     const result = await knl.sequelize().models.pedido.update({
-    id:0
+    status:0
     },{
          where : {
             id : req.body.id,
@@ -152,13 +153,3 @@ knl.patch('cliente', async(req, resp) => {
     resp.send("result")
 });
 
-knl.patch('clientes', async(req, resp) => {
-    const results = await knl.sequelize().models.proPedido.update({
-    id:0
-    },{
-         where : {
-            id : req.body.id,
-        }
-    });
-    resp.send("results")
-});

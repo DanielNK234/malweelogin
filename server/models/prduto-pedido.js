@@ -36,6 +36,11 @@ module.exports = (sequelize) => {
             type : Sequelize.DECIMAL(10,2),
             allowNull : false
         }
+        ,
+        status:{
+            type : Sequelize.INTEGER.UNSIGNED,
+            allowNull:false
+        }
 
             
         

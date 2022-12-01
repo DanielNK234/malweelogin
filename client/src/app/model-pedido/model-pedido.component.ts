@@ -3,6 +3,7 @@ import { HttpService } from 'src/services/HttpService';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormGroup, FormControl} from '@angular/forms';
+import { ModelClienteComponent } from '../model-cliente/model-cliente.component';
 
 @Component({
   selector: 'app-model-pedido',
@@ -26,7 +27,13 @@ export class ModelPedidoComponent implements OnInit {
   search: string='';
   id: number | undefined;
   startDate: Date = new Date(2022, 0, 1);
-  lastDate: Date = new Date(2050, 0, 1);
+  lastDate: Date = new Date(2222, 0, 1);
+  nomeFantasia: string ='';
+  rua: string='';
+  dialog: any;
+  clientes: Array<any>= [];
+  fkClientes:number | undefined;
+  fkEndereco:number | undefined;
 
 
   
@@ -38,6 +45,8 @@ export class ModelPedidoComponent implements OnInit {
     }
     
     async ngOnInit(){
+      await this.listaEndereco(),
+      await this.listaClientes(),
      await this.loadEndereco(),
      await this.loadClient(),
       console.log(this.data);
@@ -74,7 +83,7 @@ export class ModelPedidoComponent implements OnInit {
   
   
     async PedidoDelete(){
-      this.pedidos= await this.httpService.patch(`pedido`,{id : this.id});
+      this.pedidos = await this.httpService.patch(`pedido`,{id : this.id});
       this.dialogRef.close();
     }
   
@@ -91,4 +100,33 @@ export class ModelPedidoComponent implements OnInit {
       this.Client= await this.httpService.get('cliente');
       console.log(this.Client)
     }
+
+
+
+public addNomeFantasia(name: string, id: number){
+  this.nomeFantasia=name;
+  this.fkClientes=id;
+  this.listaEndereco();
+}
+async listaClientes(){
+  this.clientes= await this.httpService.get('cliente');
+  console.log(this.clientes);
+
+
+}
+async listaEndereco(){
+  this.Endereco= await this.httpService.get(`cliente/${this.fkClientes}`);
+  console.log(this.Endereco);
+
+
+}
+
+public addEndereco(rua: string, id: number){
+  this.rua= rua;
+  this.fkEndereco=id;
+}
+
+
+
+
 }
