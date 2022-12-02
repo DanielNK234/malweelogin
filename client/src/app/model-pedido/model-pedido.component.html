@@ -51,7 +51,6 @@
           <th>Bairro</th>
           <th>Cidade</th>
           <th>Estado</th>
-          <th>Número</th>
         </tr>
         <tr  *ngFor="let Endereco of Endereco | filter : rua">
             <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.rua}}</td>
