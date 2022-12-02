@@ -1,0 +1,108 @@
+<mat-card>
+  <mat-card-content *ngIf="htmladd ==2" >
+    <mat-tab-group>
+      <mat-tab label="cadastro">
+      <mat-card-actions class="but">
+       <mat-card-title>
+           <h1>Cadastrar</h1>
+       </mat-card-title> 
+        <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+      </mat-card-actions>
+      <mat-form-field calss = "dat" appearance="fill">
+        <mat-label>Data de Emissão</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+      
+      <mat-form-field calss = "dat" appearance="fill">
+        <mat-label>Data de entrega</mat-label>
+        <input matInput [matDatepicker]="picker1">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle  matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1 startView="year" [startAt]="lastDate"></mat-datepicker>
+      </mat-form-field><br>
+      
+
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Cliente</mat-label>
+        <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="nomeFantasia" maxlength="100" minlength="2">
+      </mat-form-field>
+      <br>
+    <table *ngIf="nomeFantasia.length">
+      <tr>
+        <th>Nome</th>
+      </tr>
+      <tr  *ngFor="let clientes of clientes  | filter : nomeFantasia">
+        <td (click)="addNomeFantasia(clientes.nomeFantasia, clientes.id)">{{clientes.nomeFantasia}}</td>
+    </tr>
+     </table>
+      <br>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Endereço</mat-label>
+        <input matInput placeholder="Digite a rua do Endereço"  type="text" [(ngModel)]="rua" maxlength="100" minlength="2">
+      </mat-form-field>
+      <br>
+      <table *ngIf="nomeFantasia.length ">
+        <tr>
+          <th>rua</th>
+          <th>Bairro</th>
+          <th>Cidade</th>
+          <th>Estado</th>
+          <th>Número</th>
+        </tr>
+        <tr  *ngFor="let Endereco of Endereco | filter : rua">
+            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.rua}}</td>
+            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.bairro}}</td>
+            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.cidade}}</td>
+            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.estado}}</td>
+        </tr> 
+       </table>
+       <br>
+
+       <mat-card-actions>
+         <button class="card" mat-raised-button color="black" (click)="PedidoAdd()" >Cadastrar</button>
+       </mat-card-actions>
+      </mat-tab>
+      <mat-tab  label="pedido">
+        <mat-card-actions class="but">
+          <mat-card-title>
+              <h1>pedido</h1>
+          </mat-card-title> 
+
+           <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+         </mat-card-actions>
+      </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<mat-card-content *ngIf="htmladd ==1">
+  <mat-card-actions class="but">
+    <mat-card-title>
+    <h1>Editar/Deletar</h1>
+  </mat-card-title>
+    <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+  </mat-card-actions>
+  
+
+  <mat-form-field class="example-full-width" appearance="fill">
+     <input matInput placeholder="Insira o ID" type="number" minlength="1" required [(ngModel)]="id">
+  </mat-form-field><br>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <input matInput placeholder="Insira a nova data de Emissao" type="text"  minlength="1" required [(ngModel)]="dtEmissao">
+ </mat-form-field> - 
+   <mat-form-field class="example-full-width" appearance="fill">
+    <input matInput placeholder="Insira a nova data de entrega" type="text"  minlength="1" required [(ngModel)]="dtEntrega">
+ </mat-form-field>
+ <mat-card-actions>
+    <button  class="card"mat-raised-button color="black"  (click)="putPedido()">Editar</button>
+    <button class="card" mat-raised-button color="black"  (click)="PedidoDelete()"  (click)="onNoClick()">Deletar</button>
+    </mat-card-actions>
+
+</mat-card-content>
+</mat-card>
+

@@ -28,6 +28,8 @@ import { ModelColectionComponent } from './model-colection/model-colection.compo
 import { UsermodelComponent } from './usermodel/usermodel.component';
 import { ModelClienteComponent } from './model-cliente/model-cliente.component';
 import { ModelProdutoComponent } from './model-produto/model-produto.component';
+import { PedidoComponent } from './pedido/pedido.component';
+import { ModelPedidoComponent } from './model-pedido/model-pedido.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { ModelProdutoComponent } from './model-produto/model-produto.component';
     ModelColectionComponent,
     UsermodelComponent,
     ModelClienteComponent,
-    ModelProdutoComponent
+    ModelProdutoComponent,
+    PedidoComponent,
+    ModelPedidoComponent
   ],
   imports: [
     RoutesModule,
