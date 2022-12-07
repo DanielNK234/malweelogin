@@ -40,7 +40,7 @@ knl.post('pedido', async(req, resp) => {
         fkCliente : req.body.fkCliente,
         fkEndereco: req.body.fkEndereco,
         total: 50,
-        status:0
+        status:1
     });
 
     await user.save();
@@ -52,8 +52,9 @@ knl.post('pedido', async(req, resp) => {
         quantidade  : proPedido.quantidade,
         acrescimo   : proPedido.acrescimo,
         description : proPedido.description,
-        fkPedido : proPedido.fkPedido,
-        total: proPedido.total
+        fkPedido : user.fkPedido,
+        total: proPedido.total,
+        status:1
         })
       await result2.save();     
     }

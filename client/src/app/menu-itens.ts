@@ -40,7 +40,7 @@ export const MenuItens = [
     {
         path: 'user',
         caption : 'Usuário',
-        icon : 'person',
+        icon : 'person_outline',
         component: UserComponent,
     },
     {

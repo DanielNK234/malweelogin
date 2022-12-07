@@ -34,7 +34,16 @@ export class ModelPedidoComponent implements OnInit {
   clientes: Array<any>= [];
   fkClientes:number | undefined;
   fkEndereco:number | undefined;
-
+  proPedidos:Array<any>= [];
+  fkPedido:number | undefined;
+  fkProduto:number | undefined;
+  quantidade:number | undefined;
+  vlUnitario:number | undefined;
+  description:string='';
+  acrescimo:number | undefined;
+  selectedProduto: number = 0;
+  produto : Array<any>=[];
+  fkCliente:number | undefined;
 
   
   constructor(public dialogRef: MatDialogRef<ModelPedidoComponent>, private httpService : HttpService,
@@ -45,6 +54,7 @@ export class ModelPedidoComponent implements OnInit {
     }
     
     async ngOnInit(){
+      await this.loadProduto(),
       await this.listaEndereco(),
       await this.listaClientes(),
      await this.loadEndereco(),
@@ -68,9 +78,16 @@ export class ModelPedidoComponent implements OnInit {
     async PedidoAdd(){
       console.log("Sub-grupo adicionado");
       console.log(this.dtEntrega);
-      this.pedidos = await this.httpService.post('pedido', {dtEmissao: this.startDate, dtEntrega: this.lastDate });
+      this.pedidos = await this.httpService.post('pedido', {dtEmissao: this.startDate, dtEntrega: this.lastDate,proPedidos: this.proPedidos, fkCliente:this.fkCliente,
+      fkEndereco: this.fkEndereco});
       this.dialogRef.close();
   
+    }
+
+    async addProPedido(){ 
+      this.proPedidos.push({'fkProduto' :this.fkProduto, 'quantidade' :this.quantidade, 'vlUnitario' :this.vlUnitario, 'description':this.description,
+        'acrescimo' :this.acrescimo,  'fkpedido' :this.fkPedido})
+        console.log(this.proPedidos);
     }
     deletePedido(){
       this.htmladd= 2;
@@ -100,12 +117,16 @@ export class ModelPedidoComponent implements OnInit {
       this.Client= await this.httpService.get('cliente');
       console.log(this.Client)
     }
+    async loadProduto(){
+      this.produto= await this.httpService.get('produto');
+      console.log(this.produto)
+    }
 
 
 
 public addNomeFantasia(name: string, id: number){
   this.nomeFantasia=name;
-  this.fkClientes=id;
+  this.fkCliente=id;
   this.listaEndereco();
 }
 async listaClientes(){
@@ -115,7 +136,7 @@ async listaClientes(){
 
 }
 async listaEndereco(){
-  this.Endereco= await this.httpService.get(`cliente/${this.fkClientes}`);
+  this.Endereco= await this.httpService.get(`cliente/${this.fkCliente}`);
   console.log(this.Endereco);
 
 

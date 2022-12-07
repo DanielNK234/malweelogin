@@ -70,9 +70,29 @@
           <mat-card-title>
               <h1>pedido</h1>
           </mat-card-title> 
-
-           <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+             <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
          </mat-card-actions>
+          <app-drpdown [array]="produto"  [title]="'Produto'" [(ngModel)]="selectedProduto"></app-drpdown>-
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>quantidade</mat-label>
+          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="quantidade" maxlength="100" minlength="2">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>descrição</mat-label>
+          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="description" maxlength="100" minlength="2">
+        </mat-form-field>-
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>acrescimo</mat-label>
+          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="acrescimo" maxlength="100" minlength="2">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>pedido</mat-label>
+          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="fkPedido" maxlength="100" minlength="2">
+        </mat-form-field>-
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>valor unitario</mat-label>
+          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="vlUnitario" maxlength="100" minlength="2">
+        </mat-form-field>
       </mat-tab>
       </mat-tab-group>
     </mat-card-content>
