@@ -26,7 +26,7 @@
       
 
 
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field  appearance="fill">
         <mat-label>Cliente</mat-label>
         <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="nomeFantasia" maxlength="100" minlength="2">
       </mat-form-field>
@@ -40,7 +40,7 @@
     </tr>
      </table>
       <br>
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field  appearance="fill">
         <mat-label>Endereço</mat-label>
         <input matInput placeholder="Digite a rua do Endereço"  type="text" [(ngModel)]="rua" maxlength="100" minlength="2">
       </mat-form-field>
@@ -70,29 +70,44 @@
           <mat-card-title>
               <h1>pedido</h1>
           </mat-card-title> 
-             <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+           <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
          </mat-card-actions>
-          <app-drpdown [array]="produto"  [title]="'Produto'" [(ngModel)]="selectedProduto"></app-drpdown>-
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>quantidade</mat-label>
-          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="quantidade" maxlength="100" minlength="2">
+        <mat-form-field class="example-full-width" appearance="legacy">
+          <mat-label>Produto</mat-label>
+          <input matInput placeholder="Ex. jeans" [(ngModel)]="prod">
         </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>descrição</mat-label>
-          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="description" maxlength="100" minlength="2">
-        </mat-form-field>-
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>acrescimo</mat-label>
-          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="acrescimo" maxlength="100" minlength="2">
-        </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>pedido</mat-label>
-          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="fkPedido" maxlength="100" minlength="2">
-        </mat-form-field>-
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>valor unitario</mat-label>
-          <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="vlUnitario" maxlength="100" minlength="2">
-        </mat-form-field>
+    
+        <div *ngIf="prod.length">
+          <div *ngFor="let produtos of produto | filter : prod">
+              <h3 (click)="addProduto(produtos.description, produtos.id,produtos.precoVenda)">{{produtos.description}}</h3>
+          </div>
+
+
+          <div *ngFor="let produtos of produto2">
+            <h3>Valor unitário : {{produtos.precoVenda}}</h3>
+            
+            <mat-form-field appearance="legacy">
+              <mat-label>Quantidade</mat-label>
+              <input matInput placeholder="digite a quantidade:" [(ngModel)]="quantidade" (blur)="calculaTotal()">
+            </mat-form-field>
+            
+    
+            <mat-form-field appearance="legacy">
+              <mat-label>Acrescimo (%)</mat-label>
+              <input matInput placeholder="digite o acrescimo:" [(ngModel)]="acrescimo" (blur)="calculaTotal()">
+            </mat-form-field>
+    
+            <mat-form-field appearance="legacy">
+              <mat-label>Desconto (%)</mat-label>
+              <input matInput placeholder="digite o desconto:" [(ngModel)]="desconto" (blur)="calculaTotal()">
+            </mat-form-field>
+    
+            <mat-form-field appearance="legacy">
+              <mat-label>Total</mat-label>
+              <input matInput [(ngModel)]="total">
+            </mat-form-field>
+      </div>
+      </div>
       </mat-tab>
       </mat-tab-group>
     </mat-card-content>

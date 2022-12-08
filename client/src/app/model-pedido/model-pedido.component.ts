@@ -37,14 +37,18 @@ export class ModelPedidoComponent implements OnInit {
   proPedidos:Array<any>= [];
   fkPedido:number | undefined;
   fkProduto:number | undefined;
-  quantidade:number | undefined;
-  vlUnitario:number | undefined;
+  quantidade:number =0;
+  vlUnitario:number =0;
   description:string='';
-  acrescimo:number | undefined;
+  acrescimo:number =0;
   selectedProduto: number = 0;
   produto : Array<any>=[];
   fkCliente:number | undefined;
-
+  prod:string='';
+  produto2:Array<any>=[];
+  ghostNumber:number=0;
+  desconto:number=0;
+  total:number=0;
   
   constructor(public dialogRef: MatDialogRef<ModelPedidoComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : {id: number, description : string}) { }
@@ -147,6 +151,27 @@ public addEndereco(rua: string, id: number){
   this.fkEndereco=id;
 }
 
+async listaProduto(){
+  this.produto = await this.httpService.get(`producto/${this.ghostNumber}`);
+  console.log(this.produto); 
+  }
+  async addProduto(precoVenda: number, description: string ,id: number){
+  this.prod = description;
+  this.id = id;
+  this.vlUnitario = precoVenda;
+  this.produto2 = await this.httpService.get(`producto/${id}`);
+      
+  
+  
+  }
+
+  calculaTotal(){
+    let descontoFinal = this.desconto/100 * this.vlUnitario;
+    let aumentoFinal = this.acrescimo/100 * this.vlUnitario;
+    let valorUnitarioL = this.vlUnitario - descontoFinal + aumentoFinal;
+    this.total = valorUnitarioL * this.quantidade;
+  }
+  
 
 
 

@@ -18,7 +18,7 @@ knl.post('pedido', async(req, resp) => {
         quantidade  : Joi.number().required(),
         acrescimo   : Joi.number().required(),
         vlUnitario :  Joi.number().required(),
-        total : Joi.number().required(),
+        total     : parseInt(quantidade) * parseFloat(vlUnitario) * acrescimo,
         fkProduto: Joi.number().required(),
         fkPedido: Joi.number().required()
             
@@ -153,4 +153,28 @@ knl.patch('pedido', async(req, resp) => {
     });
     resp.send("result")
 });
+
+knl.get('producto/:id', async(req, resp) => {
+        if(req.params.id != 0){
+            const user = await knl.sequelize().models.produto.findAll({
+                where:{
+                id : req.params.id
+                }
+            });
+            resp.send(user);
+            resp.end();
+        }else{
+            const user = await knl.sequelize().models.produto.findAll({
+                where:{
+                    fkGrupo: {
+                        [Op.ne]: 0
+                      }
+                }
+            });
+            resp.send(user);
+            resp.end();
+        }
+        
+    });
+    
 
