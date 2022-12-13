@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-
+false
 module.exports = (sequelize) => {
     sequelize.define('pedido', {
         id : {

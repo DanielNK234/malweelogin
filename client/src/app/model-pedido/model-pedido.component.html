@@ -8,7 +8,7 @@
        </mat-card-title> 
         <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
       </mat-card-actions>
-      <mat-form-field calss = "dat" appearance="fill">
+      <mat-form-field calss = "dat" appearance="legacy">
         <mat-label>Data de Emissão</mat-label>
         <input matInput [matDatepicker]="picker">
         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -16,7 +16,7 @@
         <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
       </mat-form-field>
       
-      <mat-form-field calss = "dat" appearance="fill">
+      <mat-form-field calss = "dat" appearance="legacy">
         <mat-label>Data de entrega</mat-label>
         <input matInput [matDatepicker]="picker1">
         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -26,7 +26,7 @@
       
 
 
-      <mat-form-field  appearance="fill">
+      <mat-form-field  appearance="legacy">
         <mat-label>Cliente</mat-label>
         <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="nomeFantasia" maxlength="100" minlength="2">
       </mat-form-field>
@@ -40,7 +40,7 @@
     </tr>
      </table>
       <br>
-      <mat-form-field  appearance="fill">
+      <mat-form-field  appearance="legacy">
         <mat-label>Endereço</mat-label>
         <input matInput placeholder="Digite a rua do Endereço"  type="text" [(ngModel)]="rua" maxlength="100" minlength="2">
       </mat-form-field>
@@ -62,7 +62,7 @@
        <br>
 
        <mat-card-actions>
-         <button class="card" mat-raised-button color="black" (click)="PedidoAdd()" >Cadastrar</button>
+         <button class="card" mat-raised-button color="black" (click)="addPedido()" >Cadastrar</button>
        </mat-card-actions>
       </mat-tab>
       <mat-tab  label="pedido">
@@ -85,7 +85,7 @@
 
           <div *ngFor="let produtos of produto2">
             <h3>Valor unitário : {{produtos.precoVenda}}</h3>
-            
+
             <mat-form-field appearance="legacy">
               <mat-label>Quantidade</mat-label>
               <input matInput placeholder="digite a quantidade:" [(ngModel)]="quantidade" (blur)="calculaTotal()">
@@ -106,8 +106,65 @@
               <mat-label>Total</mat-label>
               <input matInput [(ngModel)]="total">
             </mat-form-field>
+
+            <div mat-dialog-actions>
+              <button mat-raised-button (click) = "adicionarArrayDePedidos()">Adicionar</button>
+              <button mat-raised-button (click)="resetModels()">Apagar</button>
+            </div>
       </div>
       </div>
+      </mat-tab>
+
+      <mat-tab label="Confirmar pedido">
+        <table *ngIf="nomeFantasia.length">
+          <tr>
+            <th>Nome</th>
+            <th>Data de Emissão</th>
+            <th>Data de Entrega</th>
+          </tr>
+          <tr *ngFor="let cliente of clientes2">
+              <td>{{cliente.nome}}</td>
+              <td>{{cliente.dataEmissao | date: "dd/mm/yyyy"}}</td>
+              <td>{{cliente.dataEntrega | date: "dd/mm/yyyy"}}</td>
+          </tr>
+  
+          <tr>
+            <th>rua</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+          </tr>
+          <tr *ngFor="let enderecos of Endereco">
+            <td>{{enderecos.rua}}</td>
+            <td>{{enderecos.bairro}}</td>
+            <td>{{enderecos.cidade}}</td>
+            <td>{{enderecos.estado}}</td>
+          </tr>
+  
+          <tr>
+            <th>Produto</th>
+            <th>Valor Unitário</th>
+            <th>Quantidade</th>
+            <th>Acrescimo</th>
+            <th>Desconto</th>
+            <th>Total do Produto</th>
+            <th>Total</th>
+          </tr>
+          <tr *ngFor="let produto of produto3">
+            <td>{{produto.description}}</td>
+            <td>{{produto.vlUnitario}}</td>
+            <td>{{produto.quantidade}}</td>
+            <td>{{produto.acrescimo}}%</td>
+            <td>{{produto.desconto}}%</td>
+            <td>{{produto.totalPedido}}</td>
+            <td>{{produto.total}}</td>
+          </tr>
+        </table>
+  
+        <div mat-dialog-actions>
+          <button mat-raised-button (click) = "addPedido()">Confirmar</button>
+        </div>
+  
       </mat-tab>
       </mat-tab-group>
     </mat-card-content>

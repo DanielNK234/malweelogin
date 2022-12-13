@@ -40,7 +40,14 @@ module.exports = (sequelize) => {
         status:{
             type : Sequelize.INTEGER.UNSIGNED,
             allowNull:false
+        },
+        desconto :{
+            type : Sequelize.DECIMAL(10,2),
+            allowNull: false
+
         }
+
+    
 
             
         
