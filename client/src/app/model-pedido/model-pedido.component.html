@@ -1,5 +1,5 @@
-<mat-card>
-  <mat-card-content *ngIf="htmladd ==2" >
+<mat-card *ngIf="htmladd ==2">
+  <mat-card-content  >
     <mat-tab-group>
       <mat-tab label="cadastro">
       <mat-card-actions class="but">
@@ -10,7 +10,7 @@
       </mat-card-actions>
       <mat-form-field calss = "dat" appearance="legacy">
         <mat-label>Data de Emissão</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="picker"  [(ngModel)]="startDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
@@ -18,7 +18,7 @@
       
       <mat-form-field calss = "dat" appearance="legacy">
         <mat-label>Data de entrega</mat-label>
-        <input matInput [matDatepicker]="picker1">
+        <input matInput [matDatepicker]="picker1"  [(ngModel)]="lastDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle  matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1 startView="year" [startAt]="lastDate"></mat-datepicker>
@@ -162,38 +162,62 @@
         </table>
   
         <div mat-dialog-actions>
-          <button mat-raised-button (click) = "addPedido()">Confirmar</button>
+          <button mat-raised-button (click) = "addPedido()" (click)=" onNoClick()">Confirmar </button>
         </div>
   
       </mat-tab>
       </mat-tab-group>
     </mat-card-content>
+</mat-card>
 
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<mat-card-content *ngIf="htmladd ==1">
-  <mat-card-actions class="but">
-    <mat-card-title>
-    <h1>Editar/Deletar</h1>
-  </mat-card-title>
-    <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
-  </mat-card-actions>
+<mat-card *ngIf="htmladd ==1">
+
+    <div class="title">
+      <mat-card-actions class="but">
+        <mat-card-title>
+            <h1>editar pedido</h1>
+        </mat-card-title> 
+         <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
+       </mat-card-actions>
+    </div>
+    <app-drpdown [array]="produto"  [idField]="'id proPedidos_pedidos'" [title]="''" [textField]="'description'" [(ngModel)]="selectedProduto"></app-drpdown> 
   
+    <mat-form-field appearance="legacy">
+      <mat-label>Quantidade</mat-label>
+      <input matInput placeholder="digite a quantidade:" [(ngModel)]="quantidade" (blur)="calculaTotal()">
+    </mat-form-field>
+  
+    <mat-form-field appearance="legacy">
+      <mat-label>Acrescimo (%)</mat-label>
+      <input matInput placeholder="digite o acrescimo:" [(ngModel)]="acrescimo" (blur)="calculaTotal()">
+    </mat-form-field>
+  
+    <mat-form-field appearance="legacy">
+      <mat-label>Desconto (%)</mat-label>
+      <input matInput placeholder="digite o desconto:" [(ngModel)]="desconto" (blur)="calculaTotal()">
+    </mat-form-field>
+  
+    <mat-form-field appearance="legacy">
+      <mat-label>Total</mat-label>
+      <input matInput [(ngModel)]="total">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Data Emissão</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="startDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Data Entrega</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="lastDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 startView="year" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width" appearance="fill">
-     <input matInput placeholder="Insira o ID" type="number" minlength="1" required [(ngModel)]="id">
-  </mat-form-field><br>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <input matInput placeholder="Insira a nova data de Emissao" type="text"  minlength="1" required [(ngModel)]="dtEmissao">
- </mat-form-field> - 
-   <mat-form-field class="example-full-width" appearance="fill">
-    <input matInput placeholder="Insira a nova data de entrega" type="text"  minlength="1" required [(ngModel)]="dtEntrega">
- </mat-form-field>
- <mat-card-actions>
-    <button  class="card"mat-raised-button color="black"  (click)="putPedido()">Editar</button>
-    <button class="card" mat-raised-button color="black"  (click)="PedidoDelete()"  (click)="onNoClick()">Deletar</button>
-    </mat-card-actions>
-
-</mat-card-content>
 </mat-card>
-

@@ -131,11 +131,13 @@ knl.put('pedido', async(req, resp) => {
             description : proPedido.description,
             quantidade  : proPedido.quantidade,
             acrescimo   : proPedido.acrescimo,
+            desconto    : proPedido.desconto
         },{
             where : {
                 id: pedi.id
             }
         })
+    
     }
     
     resp.end();

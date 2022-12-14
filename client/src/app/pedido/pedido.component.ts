@@ -6,6 +6,7 @@ import { ModelComponent } from '../model/model.component';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { ModelSubGrupoComponent } from '../model-sub-grupo/model-sub-grupo.component';
 import { ModelPedidoComponent } from '../model-pedido/model-pedido.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-pedido',
@@ -44,6 +45,12 @@ export class PedidoComponent implements OnInit {
   
   async get(){
     this.pedidos = await this.httpService.get('pedido');
+    this.pedidos.forEach(element=>{
+      console.log(element);
+      element.dtEmissao = moment(element.dtEmissao).format('DD/MM/YYYY');
+      element.dtEntrega = moment(element.dtEntrega).format('DD/MM/YYYY');
+
+    })
   }
   
   

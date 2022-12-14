@@ -27,7 +27,7 @@ export class ModelPedidoComponent implements OnInit {
   search: string='';
   id: number | undefined;
   startDate: Date = new Date(2022, 0, 1);
-  lastDate: Date = new Date(2222, 0, 1);
+  lastDate: Date = new Date(2022, 0, 1);
   nomeFantasia: string ='';
   rua: string='';
   dialog: any;
