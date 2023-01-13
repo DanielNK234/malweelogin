@@ -20,7 +20,7 @@ export class ModelPedidoComponent implements OnInit {
   selectedClient: number = 0;
   selectedEndereco: number = 0;
   name : string = '';
-  pedidos : Array<any>=[];
+  public pedidos : Array<any>=[];
   public Client: Array<any>= [];
   public Endereco: Array<any>= [];
   htmladd: number = 0;
@@ -29,7 +29,7 @@ export class ModelPedidoComponent implements OnInit {
   startDate: Date = new Date(2022, 0, 1);
   lastDate: Date = new Date(2022, 0, 1);
   nomeFantasia: string ='';
-  rua: string='';
+  logradouro: string='';
   dialog: any;
   clientes: Array<any>= [];
   clientes2: Array<any>= [];
@@ -52,6 +52,7 @@ export class ModelPedidoComponent implements OnInit {
   total:number=0;
   total2:number=0;
   produto3 : Array<any>=[];
+  prodPedidos:Array<any>=[];
   
   constructor(public dialogRef: MatDialogRef<ModelPedidoComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : {id: number, description : string}) { }
@@ -66,6 +67,7 @@ export class ModelPedidoComponent implements OnInit {
       await this.listaClientes(),
      await this.loadEndereco(),
      await this.loadClient(),
+     await this.listarProPedido()
       console.log(this.data);
       if(this.data.id == null){
         this.htmladd = 2
@@ -107,8 +109,12 @@ export class ModelPedidoComponent implements OnInit {
     }
   
     async putPedido(){
-      this.pedidos= await this.httpService.put(`pedido`, {id : this.id, dtEntrega : this.dtEntrega,dtEmissao: this.dtEmissao });
-      this.dialogRef.close();
+      this.produto3.push({"quantidade" : this.quantidade, "valorUnitario" : this.vlUnitario, "descricao" : this.description,
+    "acrescimo" : this.acrescimo, "desconto" : this.desconto, "total" : this.total, "fkPedido" : this.selectedProduto})
+
+    this.pedidos = await this.httpService.put('pedido',{dtEmissao : this.startDate, dtEntrega : this.lastDate, 
+      proPedido : this.produto3, id : this.data.id})
+      this.onNoClick();
     }
     
     async loadEndereco(){
@@ -147,8 +153,13 @@ async listaEndereco(){
 
 }
 
-public addEndereco(rua: string, id: number){
-  this.rua= rua;
+async listarProPedido(){
+  this.prodPedidos = await this.httpService.get(`pedido/${this.data.id}`);
+
+}
+
+public addEndereco(logradouro: string, id: number){
+  this.logradouro= logradouro;
   this.fkEndereco=id;
 }
 
@@ -157,14 +168,21 @@ async listaProduto(){
   console.log(this.produto); 
   }
   
-  
+  addPreco(vlUnitario : number, description : string,total:number){
+    this.vlUnitario = vlUnitario;
+    this.description = description;
+    this.total = total
+    console.log(vlUnitario);
+  }
   async addProduto(description: string ,id: number,precoVenda: number ){
     this.prod = description;
     this.id = id;
     this.vlUnitario = precoVenda;
     this.produto2 = await this.httpService.get(`producto/${id}`);
   }
+addbutto(){
 
+}
   calculaTotal(){
     let descontoFinal = this.desconto/100 * this.vlUnitario;
     let aumentoFinal = this.acrescimo/100 * this.vlUnitario;

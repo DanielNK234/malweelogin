@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
             autoIncrement : true,
             allowNull : false
         },
-        rua : {
+        logradouro : {
             type : Sequelize.STRING(100),
             allowNull : false
         },
@@ -16,16 +16,16 @@ module.exports = (sequelize) => {
             type : Sequelize.STRING(30),
             allowNull : false
         },
-        cidade : {
+        localidade : {
             type : Sequelize.STRING(60),
             allowNull : false
         },
-        estado : {
+        uf : {
             type : Sequelize.STRING(20),
             allowNull : false
         },
         cep : {
-            type : Sequelize.INTEGER(),
+            type : Sequelize.STRING(200),
             allowNull : false
         },
         fkCliente : {

@@ -3,6 +3,7 @@ import { HttpService } from 'src/services/HttpService';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
+import { ConsultaCepService } from './consulta-cep.service';
 export interface DialogData {
   description: string;
   id: number;
@@ -28,19 +29,20 @@ export class ModelClienteComponent implements OnInit {
   id: number | undefined;
   selectedGroup: number = 0;
   all: Array<any> = [];
-  rua: string = '';
+  logradouro : string = '';
   bairro: string = '';
-  cidade: string = '';
-  estado: string = '';
+  localidade: string = '';
+  uf: string = '';
   complemento: string = '';
   numero: number = 0;
-  cep : number = 0;
+  cep : string = '';
   public enderecos : Array<any> = [];
   endereco : string = '';
   
   constructor(public dialogRef: MatDialogRef<ModelClienteComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : {id: number, nomeFantasia : string,
-      cnpj : string, razaoSocial : string, clienteDesde : Date}) { }
+      cnpj : string, razaoSocial : string, clienteDesde : Date},
+      private cepService: ConsultaCepService) { }
   
     onNoClick(): void {
       this.dialogRef.close();
@@ -61,6 +63,19 @@ export class ModelClienteComponent implements OnInit {
       this.id = this.data.id,
       this.nomeFantasia = this.nomeFantasia;
     }
+    // ____________________________________________________________________________________________________________________________
+    consultaCep(){
+      this.cepService.buscar(this.cep).subscribe((dados) => this.populaForm(dados));
+    }
+  
+    populaForm(dados : any){
+     this.cep = dados.cep,
+     this.logradouro  = dados.logradouro ,
+     this.bairro = dados.bairro,
+     this.localidade = dados.localidade,
+     this.uf = dados.uf
+    }
+    // ____________________________________________________________________________________________________________________________
     async htmlAdd(){
       this.htmladd=1;
   
@@ -79,7 +94,7 @@ export class ModelClienteComponent implements OnInit {
   
     }
     async addEndereco(){ 
-      this.enderecos.push({'rua' :this.rua, 'bairro' :this.bairro, 'cidade' :this.cidade, 'estado':this.estado,
+      this.enderecos.push({'logradouro' :this.logradouro , 'bairro' :this.bairro, 'localidade' :this.localidade, 'uf':this.uf,
         'cep' :this.cep, 'numero' :this.numero, 'complemento' :this.complemento})
         console.log(this.enderecos);
         this.reset();
@@ -145,18 +160,18 @@ export class ModelClienteComponent implements OnInit {
     }
   
     async putAddress(){
-      this.enderecos.push({rua :this.rua, bairro :this.bairro, cidade :this.cidade,
-         estado :this.estado, cep :this.cep, numero :this.numero, complemento :this.complemento, id : this.selectedGroup})
+      this.enderecos.push({logradouro  :this.logradouro , bairro :this.bairro, localidade :this.localidade,
+        uf :this.uf, cep :this.cep, numero :this.numero, complemento :this.complemento, id : this.selectedGroup})
     }
     //-----------------------
     reset(){
-      this.rua          = '';
+      this.logradouro           = '';
       this.bairro       = '';
-      this.cidade       = '';
-      this.estado       = '';
+      this.localidade       = '';
+      this.uf       = '';
       this.complemento  = '';
       this.numero       = 0;
-      this.cep          = 0;
+      this.cep          = '';
     }
 
     async loadendereco(){

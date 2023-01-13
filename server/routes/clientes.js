@@ -11,11 +11,11 @@ knl.post('cliente', async(req, resp) => {
         clienteDesde: Joi.date().raw().required(),
         
         address : Joi.array().items(Joi.object({
-            rua : Joi.string().min(1).max(100).required(),
+            logradouro : Joi.string().min(1).max(100).required(),
             bairro : Joi.string().min(1).max(100).required(),
-            cidade : Joi.string().min(1).max(100).required(),
-            estado : Joi.string().min(1).max(100).required(),
-            cep : Joi.number().integer().required(),
+            localidade : Joi.string().min(1).max(100).required(),
+            uf : Joi.string().min(1).max(100).required(),
+            cep : Joi.string().required(),
             numero: Joi.number().integer().required(),
             complemento : Joi.string().min(1).max(100).required()
         }))
@@ -44,10 +44,10 @@ knl.post('cliente', async(req, resp) => {
 
     for (const address of req.body.address){
         const result2 = knl.sequelize().models.endereco.build({
-        rua : address.rua,
+        logradouro  : address.logradouro,
         bairro      : address.bairro,
-        cidade      : address.cidade,
-        estado      : address.estado,
+        localidade  : address.localidade,
+        uf          : address.uf,
         cep         : address.cep,
         numero      : address.numero,
         complemento : address.complemento,
@@ -92,10 +92,10 @@ knl.put('cliente', async(req, resp) => {
     });
     for (const address of req.body.address){
         const result2 = knl.sequelize().models.endereco.update({
-            rua         : address.rua,
+            logradouro  : address.logradouro,
             bairro      : address.bairro,
-            cidade      : address.cidade,
-            estado      : address.estado,
+            localidade  : address.localidade,
+            uf          : address.uf,
             cep         : address.cep,
             complemento : address.complemento,
             numero      : address.numero

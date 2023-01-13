@@ -42,7 +42,7 @@
       <br>
       <mat-form-field  appearance="legacy">
         <mat-label>Endereço</mat-label>
-        <input matInput placeholder="Digite a rua do Endereço"  type="text" [(ngModel)]="rua" maxlength="100" minlength="2">
+        <input matInput placeholder="Digite a rua do Endereço"  type="text" [(ngModel)]="logradouro" maxlength="100" minlength="2">
       </mat-form-field>
       <br>
       <table *ngIf="nomeFantasia.length ">
@@ -52,11 +52,11 @@
           <th>Cidade</th>
           <th>Estado</th>
         </tr>
-        <tr  *ngFor="let Endereco of Endereco | filter : rua">
-            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.rua}}</td>
-            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.bairro}}</td>
-            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.cidade}}</td>
-            <td (click)="addEndereco(Endereco.rua, Endereco.id)">{{Endereco.estado}}</td>
+        <tr  *ngFor="let Endereco of Endereco | filter : logradouro">
+            <td (click)="addEndereco(Endereco.logradouro, Endereco.id)">{{Endereco.logradouro}}</td>
+            <td (click)="addEndereco(Endereco.logradouro, Endereco.id)">{{Endereco.bairro}}</td>
+            <td (click)="addEndereco(Endereco.logradouro, Endereco.id)">{{Endereco.localidade}}</td>
+            <td (click)="addEndereco(Endereco.logradouro, Endereco.id)">{{Endereco.uf}}</td>
         </tr> 
        </table>
        <br>
@@ -81,8 +81,6 @@
           <div *ngFor="let produtos of produto | filter : prod">
               <h3 (click)="addProduto(produtos.description, produtos.id,produtos.precoVenda)">{{produtos.description}}</h3>
           </div>
-
-
           <div *ngFor="let produtos of produto2">
             <h3>Valor unitário : {{produtos.precoVenda}}</h3>
 
@@ -104,14 +102,14 @@
     
             <mat-form-field appearance="legacy">
               <mat-label>Total</mat-label>
-              <input matInput [(ngModel)]="total">
+              <input matInput [(ngModel)]="total" (blur)="calculaTotal()">
             </mat-form-field>
 
             <div mat-dialog-actions>
               <button mat-raised-button (click) = "adicionarArrayDePedidos()">Adicionar</button>
               <button mat-raised-button (click)="resetModels()">Apagar</button>
             </div>
-      </div>
+        </div>
       </div>
       </mat-tab>
 
@@ -137,8 +135,8 @@
           <tr *ngFor="let enderecos of Endereco">
             <td>{{enderecos.rua}}</td>
             <td>{{enderecos.bairro}}</td>
-            <td>{{enderecos.cidade}}</td>
-            <td>{{enderecos.estado}}</td>
+            <td>{{enderecos.localidade}}</td>
+            <td>{{enderecos.uf}}</td>
           </tr>
   
           <tr>
@@ -176,34 +174,18 @@
 
     <div class="title">
       <mat-card-actions class="but">
-        <mat-card-title>
-            <h1>editar pedido</h1>
-        </mat-card-title> 
          <button class="buts" (click)=" onNoClick()"><mat-icon>clear</mat-icon></button>
        </mat-card-actions>
     </div>
-    <app-drpdown [array]="produto"  [idField]="'id proPedidos_pedidos'" [title]="''" [textField]="'description'" [(ngModel)]="selectedProduto"></app-drpdown> 
-  
-    <mat-form-field appearance="legacy">
-      <mat-label>Quantidade</mat-label>
-      <input matInput placeholder="digite a quantidade:" [(ngModel)]="quantidade" (blur)="calculaTotal()">
-    </mat-form-field>
-  
-    <mat-form-field appearance="legacy">
-      <mat-label>Acrescimo (%)</mat-label>
-      <input matInput placeholder="digite o acrescimo:" [(ngModel)]="acrescimo" (blur)="calculaTotal()">
-    </mat-form-field>
-  
-    <mat-form-field appearance="legacy">
-      <mat-label>Desconto (%)</mat-label>
-      <input matInput placeholder="digite o desconto:" [(ngModel)]="desconto" (blur)="calculaTotal()">
-    </mat-form-field>
-  
-    <mat-form-field appearance="legacy">
-      <mat-label>Total</mat-label>
-      <input matInput [(ngModel)]="total">
-    </mat-form-field>
-  
+     
+     
+     <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+          <mat-panel-title>
+            Editar
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
     <mat-form-field appearance="fill">
       <mat-label>Data Emissão</mat-label>
       <input matInput [matDatepicker]="picker" [(ngModel)]="startDate">
@@ -219,5 +201,64 @@
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2 startView="year" [startAt]="startDate"></mat-datepicker>
     </mat-form-field>
+
+ <div class="center">
+        <div class="buuton">
+          <div *ngFor="let produtos of produto">
+              <h3 (click)="addProduto(produtos.description, produtos.id,produtos.precoVenda)"><button></button></h3>
+          </div>
+        </div>
+          <div *ngFor="let produtos of produto2">
+    <app-drpdown [array]="prodPedidos"  [textField]="'description'" 
+      [title]="''" [(ngModel)]="selectedProduto"></app-drpdown> 
+
+       <div *ngIf="selectedProduto > 0">
+        <div *ngFor="let proPedido of proPedidos">
+          <div *ngIf="selectedProduto == proPedido.id">
+            <h3 (click)="addPreco(proPedido.vlUnitario, proPedido.description,proPedido.total)">{{proPedido.vlUnitario}}</h3>
+          </div>
+        </div>
+      </div>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Quantidade</mat-label>
+        <input matInput placeholder="digite a quantidade:" [(ngModel)]="quantidade" (blur)="calculaTotal()">
+      </mat-form-field>
+    
+      <mat-form-field appearance="legacy">
+        <mat-label>Acrescimo (%)</mat-label>
+        <input matInput placeholder="digite o acrescimo:" [(ngModel)]="acrescimo" (blur)="calculaTotal()">
+      </mat-form-field>
+    
+      <mat-form-field appearance="legacy">
+        <mat-label>Desconto (%)</mat-label>
+        <input matInput placeholder="digite o desconto:" [(ngModel)]="desconto" (blur)="calculaTotal()">
+      </mat-form-field>
+    
+      <mat-form-field appearance="legacy">
+        <mat-label>Total</mat-label>
+        <input matInput [(ngModel)]="total"  >
+      </mat-form-field>
+    <mat-card-actions> 
+        <button  class="card"mat-raised-button color="black"  (click)="putPedido()" (click)=" onNoClick()">editar</button>
+    </mat-card-actions>
+    </div>
+    </div>
+
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+          <mat-panel-title>
+            Deletar
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p>Você realmente deseja deletar este ENDEREÇO ?</p>
+
+        <mat-card-actions> 
+        <button  class="card"mat-raised-button color="black"  (click)="PedidoDelete()" (click)=" onNoClick()">deletar</button>
+    </mat-card-actions>
+    </mat-expansion-panel>
 
 </mat-card>

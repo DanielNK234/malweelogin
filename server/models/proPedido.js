@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
         }
         ,
         status:{
-            type : Sequelize.INTEGER.UNSIGNED,
+            type : Sequelize.INTEGER,
             allowNull:false
         },
         desconto :{

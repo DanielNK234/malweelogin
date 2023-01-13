@@ -15,6 +15,7 @@
         <table>
           <tr>
             <th>ID</th>
+            <th>pedido</th>
             <th>clientes</th>
             <th>data de emissão</th>
             <th>data de entrega</th>
@@ -23,7 +24,8 @@
           <tr  *ngFor="let pedidos of pedidos  | filter : search">
            <ng-template [ngIf] = "pedidos.fkGrupo != 0"> 
               <td (click)="openPutModal(pedidos)">{{pedidos.id}}</td>
-               <td (click)="openPutModal(pedidos)">{{pedidos.cliente_nomeFantasia}}</td>
+              <td (click)="openPutModal(pedidos)">{{pedidos.proPedido_description}}</td>
+              <td (click)="openPutModal(pedidos)">{{pedidos.cliente_description}}</td>
               <td (click)="openPutModal(pedidos)">{{pedidos.dtEmissao}}</td>
               <td (click)="openPutModal(pedidos)">{{pedidos.dtEntrega}}</td>
             </ng-template>

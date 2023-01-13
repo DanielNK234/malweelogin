@@ -8,7 +8,13 @@ mat-card{
     h1{
         color: black;
     }
-    
+    .buuton{
+        border: none;
+        background: none;
+        display: flex;
+        align-items: flex-start;
+
+      }
     mat-dialog-container{
         background-color: rgb(84, 84, 84);
 
@@ -44,4 +50,6 @@ mat-card{
     table {
         border:10px black;
       }
+
+
 
